@@ -1,5 +1,6 @@
+
 """
-Pandemic Contagion Simulator V.0.2
+Pandemic Contagion Simulator V.0.1
 Copyright (C) 2021  Bjørn Utzon, Henrik Riskær, Nicolai Nielsen, Lau Sivertsen
 
 This program is free software; you can redistribute it and/or
@@ -16,33 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
-import sys, pygame
-from random import randint
 
+print("Hello world!")
 
-# Set size of pygame window
-resolution = width, height = 800, 600
-screen = pygame.display.set_mode(resolution)
-
-class Node:
-    """ Constructor. instantiate n nodes with speed, position and contagion status """
-    def __init__(self, status):
-        self.speed = 1
-        self.pos = [randint(width), randint(height)]
-        self.status = status
-
-
-def healthy(args):
-    pass
-
-popDensity = 6969
-for i in range(popDensity):
-    human = Node(healthy)
-
-
-def sick(args):
-    pass
-
-
-for humans in range(popDensity/2):
-    human = Node(sick)
