@@ -44,4 +44,3 @@ for i in range(popDensity):
 
 def sick(args):
     pass
-#henrik lugter af gouda
