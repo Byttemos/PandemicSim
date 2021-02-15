@@ -1,5 +1,5 @@
 """
-Pandemic Contagion Simulator V.0.1
+Pandemic Contagion Simulator V.0.2
 Copyright (C) 2021  Bjørn Utzon, Henrik Riskær, Nicolai Nielsen, Lau Sivertsen
 
 This program is free software; you can redistribute it and/or
