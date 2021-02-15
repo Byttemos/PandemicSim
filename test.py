@@ -18,29 +18,45 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
-import sys, pygame
-from random import randint
+import pygame, sys
+import numpy as np
 # test 
-
+pygame.init()
 # Set size of pygame window
 resolution = width, height = 800, 600
 screen = pygame.display.set_mode(resolution)
 
+
 class Node:
     """ Constructor. instantiate n nodes with speed, position and contagion status """
-    def __init__(self, status):
+    def __init__(self, status, quarantined, ):
         self.speed = 1
-        self.pos = [randint(width), randint(height)]
+        self.pos = [np.random.randint(width), np.random.randint(height)]
         self.status = status
-
+        self.quarantined = quarantined
+        self.color = np.random.randint(255, size=3)
 
 def healthy(args):
     pass
-
-popDensity = 6969
+black = 255, 255, 255
+nodelist = []
+popDensity = 1000
 for i in range(popDensity):
-    human = Node(healthy)
+    nodelist.append(Node(healthy, False))
 
 
 def sick(args):
     pass
+
+
+drawing = True
+pygame.display.set_caption("PandemicSim")
+while drawing:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+
+    # nodelist[0] == node
+    screen.fill(black)
+    for node in nodelist:
+        pygame.draw.circle(screen, node.color, node.pos, 8, 0)
+    pygame.display.flip()
