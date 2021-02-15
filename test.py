@@ -44,7 +44,7 @@ def sick(args):
     pass
 
 
-for humans in range(popdensity/2):
+for humans in range(popDensity/2):
     human = Node(sick)
 
 
