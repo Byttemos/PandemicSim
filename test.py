@@ -18,39 +18,36 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
-import pygame, sys
+import pygame, sys, time
+from Node import Node
 import numpy as np
+from dataclasses import dataclass
 # test 
 pygame.init()
 # Set size of pygame window
 resolution = width, height = 800, 600
 screen = pygame.display.set_mode(resolution)
+print(screen.get_width())
+popDensity = 10
 
 
-class Node:
-    """ Constructor. instantiate n nodes with speed, position and contagion status """
-    def __init__(self, status, quarantined, ):
-        self.speed = 1
-        self.pos = [np.random.randint(width), np.random.randint(height)]
-        self.status = status
-        self.quarantined = quarantined
-        self.color = np.random.randint(255, size=3)
 
-def healthy(args):
-    pass
 black = 255, 255, 255
+
 nodelist = []
-popDensity = 1000
+
+
+
 for i in range(popDensity):
-    nodelist.append(Node(healthy, False))
+    nodelist.append(Node(screen))
 
 
-def sick(args):
-    pass
-
+nodelist[0].makeSick()
 
 drawing = True
 pygame.display.set_caption("PandemicSim")
+counter = 0
+print(type(nodelist[0].pos))
 while drawing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
@@ -58,5 +55,11 @@ while drawing:
     # nodelist[0] == node
     screen.fill(black)
     for node in nodelist:
-        pygame.draw.circle(screen, node.color, node.pos, 8, 0)
+        node.draw()
+        node.update()
+        for somenode in nodelist:
+            if node == somenode:
+                continue
+            else:
+                node.spreadInfection(somenode)
     pygame.display.flip()
