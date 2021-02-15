@@ -1,4 +1,3 @@
-
 """
 Pandemic Contagion Simulator V.0.1
 Copyright (C) 2021  Bjørn Utzon, Henrik Riskær, Nicolai Nielsen, Lau Sivertsen
@@ -19,4 +18,3 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
 print("Hello world!")
-
