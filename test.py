@@ -1,6 +1,8 @@
+
 """
+
 Pandemic Contagion Simulator V.0.2
-Copyright (C) 2021  Bjørn Utzon, Henrik Riskær, Nicolai Nielsen, Lau Sivertsen
+Copyright (C) 2021  Bjørn Utzon, Henrik Riskær, Magnus Nielsen, Nicolai Nielsen, Lau Sivertsen
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -43,6 +45,3 @@ for i in range(popDensity):
 def sick(args):
     pass
 
-
-for humans in range(popDensity/2):
-    human = Node(sick)
