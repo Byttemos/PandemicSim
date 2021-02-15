@@ -46,7 +46,3 @@ def sick(args):
 
 for humans in range(popDensity/2):
     human = Node(sick)
-
-
-
-
