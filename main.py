@@ -1,4 +1,3 @@
-
 """
 
 Pandemic Contagion Simulator V.0.2
@@ -19,49 +18,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 import pygame, sys, time
-from Node import Node
+from nodeSystem import NodeSystem as ns
 import numpy as np
 from dataclasses import dataclass
-# test 
+
 pygame.init()
 # Set size of pygame window
 resolution = width, height = 800, 600
 screen = pygame.display.set_mode(resolution)
-print(screen.get_width())
-popDensity = 100
+n = 100
+
+nodesys = ns(screen, n)
 
 
-
-black = 255, 255, 255
-
-nodelist = []
-
-
-
-for i in range(popDensity):
-    nodelist.append(Node(screen))
-
-
-nodelist[0].makeSick()
-
-drawing = True
+print(nodesys.nodes)
 pygame.display.set_caption("PandemicSim")
-counter = 0
-print(type(nodelist[0].pos))
+drawing = True
+
 while drawing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-
-    # nodelist[0] == node
-    screen.fill(black)
-    for node in nodelist:
-        node.draw()
-        node.update()
-
-        for somenode in nodelist:
-            if node == somenode:
-                continue
-            else:
-                node.spreadInfection(somenode)
-
+    screen.fill([255, 255, 255])
+    nodesys.drawNodes()
+    nodesys.updatePosition()
     pygame.display.flip()
+
+
+
+
+
+
+
+
