@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 class Node:
     """ Constructor. instantiate n nodes with speed, position and contagion status """
-    def __init__(self, screen, status=1, radius=20):
+    def __init__(self, screen, status=1, radius=8):
         self.healthy_color = 0, 255, 0
         self.sick_color = 255, 0, 0
         self.speed = np.random.rand(2)*2-1

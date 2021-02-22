@@ -28,7 +28,7 @@ pygame.init()
 resolution = width, height = 800, 600
 screen = pygame.display.set_mode(resolution)
 print(screen.get_width())
-popDensity = 10
+popDensity = 50
 
 
 
