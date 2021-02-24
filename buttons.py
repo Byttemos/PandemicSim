@@ -8,26 +8,26 @@ class buttons:
         self.press_color = 0,0,255
         self.butWidth = butWidth
         self.butHeight = butHeight
-        numNodesPlus = self.rect = Rect(20,20,40,40)
-        numNodesMinus = self.rect = Rect(80,20,40,40)
+        numNodesPlus = self.rect = pygame.Rect(20,20,40,40)
+        numNodesMinus = self.rect = pygame.Rect(80,20,40,40)
         pygame.Surface.fill()
-        mouse_x,mouse_y = pygame.mouse.get_pos()
+        self.mouse_x, self.mouse_y = pygame.mouse.get_pos()
 
 
     def press(self):
-    if mouse_x>= 20 and mouse_x<= 70 and mouse_y >= 20 and mouse_y <= 70| mouse_x>= 80 and mouse_x<= 130 and mouse_y >= 20 and mouse_y <= 70:
-        if pygame.mouse.get_pressed == (1,0,0):
-            pygame.Surface.fill()=self.press_color
+        if self.mouse_x >= 20 and self.mouse_y <= 70 and self.mouse_y >= 20 and self.mouse_y <= 70| self.mouse_x>= 80 and self.mouse_x<= 130 and self.mouse_y >= 20 and self.mouse_y <= 70:
+            if pygame.mouse.get_pressed == (1,0,0):
+                pygame.Surface.fill(self.press_color)
 
         
 
-    def hover(self)
-    if mouse_x>=20 & mouse_x<=70 & mouse_y >= 20 & mouse_y <= 70 or mouse_x>=80 & mouse_x<= 130 & mouse_y >= 20 & mouse_y <= 70:
-        if pygame.mouse.get_pressed == (1,0,0):
-            pygame.Surface.fill()=self.hover.color
+    def hover(self):
+        if self.mouse_x >=20 & self.mouse_x <=70 & self.mouse_y >= 20 & self.mouse_y <= 70 or self.mouse_x>=80 & self.mouse_x<= 130 & self.mouse_y >= 20 & self.mouse_y <= 70:
+            if pygame.mouse.get_pressed == (1,0,0):
+                pygame.Surface.fill(self.hover_color)
 
-    def static(self)
-    if mouse_x>=20 & mouse_x<=70 & mouse_y >= 20 & mouse_y <= 70| mouse_x>=80 & mouse_x<= 130 & mouse_y >= 20 & mouse_y <= 70:
-        if pygame.mouse.get_pressed == (1,0,0):
-            pygame.Surface.fill()=self.static_color
+    def static(self):
+        if self.mouse_x>=20 & self.mouse_x<=70 & self.mouse_y >= 20 & self.mouse_y <= 70| self.mouse_x>=80 & self.mouse_x<= 130 & self.mouse_y >= 20 & self.mouse_y <= 70:
+            if pygame.mouse.get_pressed == (1,0,0):
+                pygame.Surface.fill(self.static_color)
 
