@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 import pygame, sys, time
 from Node import Node
+
 import numpy as np
 from dataclasses import dataclass
 # test 
@@ -32,7 +33,7 @@ popDensity = 10
 
 
 
-black = 255, 255, 255
+black = 0, 0, 0
 
 nodelist = []
 
@@ -51,7 +52,7 @@ print(type(nodelist[0].pos))
 while drawing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-
+        
     # nodelist[0] == node
     screen.fill(black)
     for node in nodelist:

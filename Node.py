@@ -5,7 +5,7 @@ class Node:
     def __init__(self, screen, status=1, radius=20):
         self.healthy_color = 0, 255, 0
         self.sick_color = 255, 0, 0
-        self.speed = np.random.rand(2)*2-1
+        self.speed = np.random.rand(2)
         self.screen = screen
         self.width = screen.get_width()
         self.height = screen.get_height()
