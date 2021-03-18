@@ -24,24 +24,29 @@ from dataclasses import dataclass
 
 pygame.init()
 # Set size of pygame window
-resolution = width, height = 800, 600
+resolution = width, height = 1500, 1000
 screen = pygame.display.set_mode(resolution)
-n = 100
+n = 10000
 
 nodesys = ns(screen, n)
 
 
-print(nodesys.nodes)
+
 pygame.display.set_caption("PandemicSim")
 drawing = True
-
+p=0
 while drawing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
     screen.fill([255, 255, 255])
     nodesys.drawNodes()
-    nodesys.updatePosition()
+    for i in range(1):
+        nodesys.updatePosition()
     pygame.display.flip()
+    if p > 1e3:
+        drawing = False
+        pygame.QUIT; sys.exit()
+    p+=1
 
 
 

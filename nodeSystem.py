@@ -9,7 +9,7 @@ class NodeSystem:
         self.nodes[:, [3, 4]] = np.random.rand(n, 2)*2-1
         self.sick_color = 255, 0, 0
         self.healthy_color = 0, 255, 0
-        self.node_radius = 8
+        self.node_radius = 2
 
     def color(self, row):
         if not row[2]:
@@ -32,7 +32,10 @@ class NodeSystem:
         for row in self.nodes:
             pygame.draw.circle(self.screen, self.color(row), row[[0,1]], self.node_radius, 0)
 
-
+    """Update position and reverse direction for all nodes with coordinates out of bounds"""
     def updatePosition(self):
         self.nodes[:, [0,1]] += self.nodes[:, [3,4]]
-
+        self.nodes[self.nodes[:, 0] < 0, 3] *= (-1)
+        self.nodes[self.nodes[:, 0] > self.screen.get_width(), 3] *= (-1)
+        self.nodes[self.nodes[:, 1] < 0, 4] *= (-1)
+        self.nodes[self.nodes[:, 1] > self.screen.get_height(), 4] *= (-1)
