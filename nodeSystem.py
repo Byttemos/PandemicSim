@@ -1,6 +1,6 @@
 import numpy as np
-import pygame, sys
-
+import pygame, sys, json
+simlog = []
 class NodeSystem:
     def __init__(self, screen, n):
         self.screen = screen
@@ -9,7 +9,7 @@ class NodeSystem:
         self.nodes[:, [3, 4]] = np.random.rand(n, 2)*2-1
         self.sick_color = 255, 0, 0
         self.healthy_color = 0, 255, 0
-        self.node_radius = 2
+        self.node_radius = 1
 
     def color(self, row):
         if not row[2]:
@@ -39,3 +39,6 @@ class NodeSystem:
         self.nodes[self.nodes[:, 0] > self.screen.get_width(), 3] *= (-1)
         self.nodes[self.nodes[:, 1] < 0, 4] *= (-1)
         self.nodes[self.nodes[:, 1] > self.screen.get_height(), 4] *= (-1)
+
+    def logData(self):
+        np.savetxt("logfile", np.concatenate(self.nodes))

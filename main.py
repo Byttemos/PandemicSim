@@ -26,7 +26,7 @@ pygame.init()
 # Set size of pygame window
 resolution = width, height = 1500, 1000
 screen = pygame.display.set_mode(resolution)
-n = 10000
+n = 10
 
 nodesys = ns(screen, n)
 
@@ -37,17 +37,24 @@ drawing = True
 p=0
 while drawing:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+       if event.type == pygame.QUIT: sys.exit()
+    for i in range(1):
+        nodesys.updatePosition()
+        nodesys.logData()
+    if p > 1e3:
+        drawing = False
+        pygame.QUIT;
+        sys.exit()
+    p += 1
+
+    """
     screen.fill([255, 255, 255])
     nodesys.drawNodes()
     for i in range(1):
         nodesys.updatePosition()
     pygame.display.flip()
-    if p > 1e3:
-        drawing = False
-        pygame.QUIT; sys.exit()
-    p+=1
-
+    
+"""
 
 
 
