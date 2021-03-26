@@ -29,7 +29,7 @@ pygame.init()
 resolution = width, height = 800, 600
 screen = pygame.display.set_mode(resolution)
 print(screen.get_width())
-popDensity = 10
+popDensity = 100
 
 
 
@@ -58,9 +58,11 @@ while drawing:
     for node in nodelist:
         node.draw()
         node.update()
+
         for somenode in nodelist:
             if node == somenode:
                 continue
             else:
                 node.spreadInfection(somenode)
+
     pygame.display.flip()
