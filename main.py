@@ -22,31 +22,33 @@ from nodeSystem import NodeSystem as ns
 import numpy as np
 from dataclasses import dataclass
 
-pygame.init()
-# Set size of pygame window
-resolution = width, height = 1500, 1000
-screen = pygame.display.set_mode(resolution)
-n = 10000
 
-nodesys = ns(screen, n)
+def runSim(n, iteration_number):
+    pygame.init()
+    # Set size of pygame window
+    resolution = width, height = 1500, 1000
+    screen = pygame.display.set_mode(resolution)
+   # n = interface.population_slider.get()
+
+    nodesys = ns(screen, n)
 
 
 
-pygame.display.set_caption("PandemicSim")
-drawing = True
-p=0
-while drawing:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-    screen.fill([255, 255, 255])
-    nodesys.drawNodes()
-    for i in range(1):
-        nodesys.updatePosition()
-    pygame.display.flip()
-    if p > 1e3:
-        drawing = False
-        pygame.QUIT; sys.exit()
-    p+=1
+    pygame.display.set_caption("PandemicSim")
+    drawing = True
+    p=0
+    while drawing:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+        screen.fill([255, 255, 255])
+        nodesys.drawNodes()
+        for i in range(1):
+            nodesys.updatePosition()
+        pygame.display.flip()
+        if p > iteration_number:
+            drawing = False
+            pygame.QUIT; sys.exit()
+        p+=1
 
 
 
