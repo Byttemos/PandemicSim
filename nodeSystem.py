@@ -2,22 +2,21 @@ import numpy as np
 import pygame, sys, json
 simlog = []
 class NodeSystem:
-    def __init__(self, screen, n):
+    def __init__(self,screen,n):
         self.screen = screen
-        self.nodes = np.zeros((n, 5))
+        self.nodes = np.zeros((n,3))
         self.nodes[:, [0, 1]] = np.random.randint([self.screen.get_width(), self.screen.get_height()], size = (n, 2))
-        self.nodes[:, [3, 4]] = np.random.rand(n, 2)*2-1
+        self.updateArray = np.zeros((n,2))
+        self.updateArray[:, [0,1]] = np.random.rand(n, 2)*2-1
         self.sick_color = 255, 0, 0
         self.healthy_color = 0, 255, 0
-        self.node_radius = 1
+        self.node_radius = 2
 
     def color(self, row):
         if not row[2]:
-           return self.healthy_color
+            return self.healthy_color
         else:
-           return self.sick_color
-
-
+            return self.sick_color
 
     def addNode(self, coords = None):
         coords = coords if coords else np.random.randint([self.screen.get_width(), self.screen.get_height()])
@@ -25,20 +24,9 @@ class NodeSystem:
         print(self.nodes.shape, row.shape)
         self.nodes = np.vstack((self.nodes, row))
 
-
-
     def drawNodes(self):
-
         for row in self.nodes:
             pygame.draw.circle(self.screen, self.color(row), row[[0,1]], self.node_radius, 0)
 
-    """Update position and reverse direction for all nodes with coordinates out of bounds"""
     def updatePosition(self):
-        self.nodes[:, [0,1]] += self.nodes[:, [3,4]]
-        self.nodes[self.nodes[:, 0] < 0, 3] *= (-1)
-        self.nodes[self.nodes[:, 0] > self.screen.get_width(), 3] *= (-1)
-        self.nodes[self.nodes[:, 1] < 0, 4] *= (-1)
-        self.nodes[self.nodes[:, 1] > self.screen.get_height(), 4] *= (-1)
-
-    def logData(self):
-        np.savetxt("logfile", np.concatenate(self.nodes))
+        self.nodes[:, [0,1]] += self.updateArray[:, [0,1]]
