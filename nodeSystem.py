@@ -1,5 +1,6 @@
 import numpy as np
 import pygame, sys
+import pandas as pd
 
 class NodeSystem:
     def __init__(self, screen, n):
@@ -24,6 +25,13 @@ class NodeSystem:
         row = np.array([*coords, 0, 1])
         print(self.nodes.shape, row.shape)
         self.nodes = np.vstack((self.nodes, row))
+
+
+    def logData(self, data):
+        print(data.shape)
+        print(self.nodes.shape)
+        np.concatenate((data, self.nodes))
+
 
 
 
