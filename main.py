@@ -37,12 +37,7 @@ def runSim(n, iteration_number):
     pygame.display.set_caption("PandemicSim")
     drawing = True
     p=0
-
-    #if os.path.exists("simlog.csv"):
-    #    data = np.loadtxt("simlog.csv")
-   # else:
     data = np.zeros((1,5))
-
     while drawing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -53,10 +48,7 @@ def runSim(n, iteration_number):
             data = nodesys.logData(data)
         pygame.display.flip()
         if p > iteration_number:
+            np.savetxt("simlog.csv", data, delimiter=",")
             drawing = False
             pygame.QUIT; sys.exit()
-            try:
-                np.savetxt("simlog.csv", data, delimiter=",")
-            except:
-                print("failed")
         p+=1
