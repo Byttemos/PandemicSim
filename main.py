@@ -31,10 +31,9 @@ n = 10
 nodesys = ns(screen, n)
 
 
-
 pygame.display.set_caption("PandemicSim")
 drawing = True
-p=0
+p = 10
 while drawing:
     for event in pygame.event.get():
        if event.type == pygame.QUIT: sys.exit()
