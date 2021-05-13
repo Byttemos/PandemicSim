@@ -1,5 +1,4 @@
 """
-
 Pandemic Contagion Simulator V.0.2
 Copyright (C) 2021  Bjørn Utzon, Henrik Riskær, Magnus Nielsen, Nicolai Nielsen, Lau Sivertsen
 
@@ -23,16 +22,14 @@ import numpy as np
 from dataclasses import dataclass
 
 
+
 def runSim(n, iteration_number):
     pygame.init()
     # Set size of pygame window
     resolution = width, height = 1500, 1000
     screen = pygame.display.set_mode(resolution)
-   # n = interface.population_slider.get()
 
     nodesys = ns(screen, n)
-
-
 
     pygame.display.set_caption("PandemicSim")
     drawing = True
