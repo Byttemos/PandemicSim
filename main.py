@@ -24,13 +24,13 @@ from dataclasses import dataclass
 
 
 def runSim(n, iteration_number):
-    pygame.init()
+    # pygame.init()
     # Set size of pygame window
     resolution = width, height = 1500, 1000
-    screen = pygame.display.set_mode(resolution)
+    # screen = pygame.display.set_mode(resolution)
    # n = interface.population_slider.get()
 
-    nodesys = ns(screen, n)
+    nodesys = ns(n)
 
 
 
@@ -39,16 +39,14 @@ def runSim(n, iteration_number):
     p=0
     data = np.zeros((1,5))
     while drawing:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
-        screen.fill([255, 255, 255])
-        nodesys.drawNodes()
+        #screen.fill([255, 255, 255])
+        #nodesys.drawNodes()
         for i in range(1):
             nodesys.updatePosition()
             data = nodesys.logData(data)
-        pygame.display.flip()
+        # pygame.display.flip()
         if p > iteration_number:
             np.savetxt("simlog.csv", data, delimiter=",")
             drawing = False
-            pygame.QUIT; sys.exit()
+            # pygame.QUIT; sys.exit()
         p+=1
