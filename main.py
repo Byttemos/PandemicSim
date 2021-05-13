@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
-import pygame, sys, time
+import pygame, sys, time, os
 from nodeSystem import NodeSystem as ns
 import numpy as np
 from dataclasses import dataclass
@@ -37,7 +37,12 @@ def runSim(n, iteration_number):
     pygame.display.set_caption("PandemicSim")
     drawing = True
     p=0
-    data = np.loadtxt("simlog_test.csv", delimiter=",")
+
+    #if os.path.exists("simlog.csv"):
+    #    data = np.loadtxt("simlog.csv")
+   # else:
+    data = np.zeros((1,5))
+
     while drawing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -45,12 +50,13 @@ def runSim(n, iteration_number):
         nodesys.drawNodes()
         for i in range(1):
             nodesys.updatePosition()
-            nodesys.logData(data)
-            data = ns.nodes
+            data = nodesys.logData(data)
         pygame.display.flip()
         if p > iteration_number:
             drawing = False
             pygame.QUIT; sys.exit()
-            np.savetxt("simlog.csv", data, delimiter=",")
-
+            try:
+                np.savetxt("simlog.csv", data, delimiter=",")
+            except:
+                print("failed")
         p+=1
