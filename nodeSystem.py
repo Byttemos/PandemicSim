@@ -6,14 +6,16 @@ class NodeSystem:
     def __init__(self, screen, n):
         self.screen = screen
         self.nodes = np.zeros((n, 5))
-        self.nodes[:, [0, 1]] = np.random.randint([self.screen.get_width(), self.screen.get_height()], size = (n, 2)) #initial position
+        self.nodes[:, [0, 1]] = np.random.randint([self.screen.get_width(), self.screen.get_height()], size = (n, 2)) #Initial position of the nodes, with the screensize as boundaries.
         self.nodes[:, [3, 4]] = np.random.rand(n, 2)*2-1 #Node velocity
         self.sick_color = 255, 0, 0
         self.healthy_color = 0, 255, 0
-        self.node_radius = 2 #radius of nodes (GIRTH)
+        self.innoculated = 0, 0, 255
+        self.immune = 125, 0, 125
 
-"""Deprecated function. rewrite"""
+        self.node_radius = 2 #Radius of Nodes (GIRTH)
 
+    """Deprecated function. rewrite"""
     def color(self, row):
         if not row[2]:
            return self.healthy_color
