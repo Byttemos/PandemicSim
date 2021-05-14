@@ -6,7 +6,7 @@ class NodeSystem:
     def __init__(self, n):
         self.nodes = np.zeros((n, 5))
         self.nodes[:, [0, 1]] = np.random.randint([1500, 1000], size = (n, 2))
-        self.nodes[:, [3, 4]] = np.random.rand(n, 2)*2-1
+        self.nodes[:, [3, 4]] = np.random.randn(n, 2)
         self.sick_color = 255, 0, 0
         self.healthy_color = 0, 255, 0
         self.node_radius = 2
@@ -23,12 +23,14 @@ class NodeSystem:
         coords = coords if coords else np.random.randint([self.screen.get_width(),
                                                           self.screen.get_height()])
         row = np.array([*coords, 0, 1])
-        print(self.nodes.shape, row.shape)
         self.nodes = np.vstack((self.nodes, row))
 
 
     def logData(self, data):
-        return np.concatenate((data, self.nodes))
+        if len(data.shape) == 2:
+            return np.stack((data, self.nodes))
+        else:
+            return np.concatenate((data, self.nodes[None, :, :]))
 
 
 

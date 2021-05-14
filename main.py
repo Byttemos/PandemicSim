@@ -23,20 +23,24 @@ import numpy as np
 from dataclasses import dataclass
 
 def callbacktest(nodesystem):
-    print(nodesystem.nodes)
-
+    #print(nodesystem.nodes)
+    pass
 def runSim(n, iteration_number, log_steps = 10, callback = callbacktest):
 
     nodesys = ns(n)
-    data = np.zeros((1,5))
 
+    data = np.zeros((1, 5))
     for i in range(iteration_number):
         nodesys.updatePosition()
-        data = nodesys.logData(data) if i % log_steps == 0 else data
+
+        if (data == 0).all():
+            data = nodesys.nodes
+
+        else:
+            data = nodesys.logData(data) if i % log_steps == 0 else data
 
         if callback:
             callback(nodesys)
 
-    np.savetxt("simlog.csv", data, delimiter=",")
-
-
+    with open("simlog.npy", "wb") as f:
+        np.save(f, data)
