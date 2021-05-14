@@ -20,7 +20,8 @@ class NodeSystem:
 
 
     def addNode(self, coords = None):
-        coords = coords if coords else np.random.randint([self.screen.get_width(), self.screen.get_height()])
+        coords = coords if coords else np.random.randint([self.screen.get_width(),
+                                                          self.screen.get_height()])
         row = np.array([*coords, 0, 1])
         print(self.nodes.shape, row.shape)
         self.nodes = np.vstack((self.nodes, row))

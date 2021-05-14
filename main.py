@@ -22,31 +22,21 @@ from nodeSystem import NodeSystem as ns
 import numpy as np
 from dataclasses import dataclass
 
+def callbacktest(nodesystem):
+    print(nodesystem.nodes)
 
-def runSim(n, iteration_number):
-    # pygame.init()
-    # Set size of pygame window
-    resolution = width, height = 1500, 1000
-    # screen = pygame.display.set_mode(resolution)
-   # n = interface.population_slider.get()
+def runSim(n, iteration_number, log_steps = 10, callback = callbacktest):
 
     nodesys = ns(n)
-
-
-
-    pygame.display.set_caption("PandemicSim")
-    drawing = True
-    p=0
     data = np.zeros((1,5))
-    while drawing:
-        #screen.fill([255, 255, 255])
-        #nodesys.drawNodes()
-        for i in range(1):
-            nodesys.updatePosition()
-            data = nodesys.logData(data)
-        # pygame.display.flip()
-        if p > iteration_number:
-            np.savetxt("simlog.csv", data, delimiter=",")
-            drawing = False
-            # pygame.QUIT; sys.exit()
-        p+=1
+
+    for i in range(iteration_number):
+        nodesys.updatePosition()
+        data = nodesys.logData(data) if i % log_steps == 0 else data
+
+        if callback:
+            callback(nodesys)
+
+    np.savetxt("simlog.csv", data, delimiter=",")
+
+
