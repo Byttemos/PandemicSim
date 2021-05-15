@@ -4,9 +4,9 @@ import pygame, sys
 
 class NodeSystem:
     def __init__(self, n):
-        self.nodes = np.zeros((n, 5))
+        self.nodes = np.zeros((n, 8))
         self.nodes[:, [0, 1]] = np.random.randint([1500, 1000], size = (n, 2))
-        self.nodes[:, [3, 4]] = np.random.randn(n, 2)
+        self.nodes[:, [2, 3]] = np.random.randn(n, 2)
         self.sick_color = 255, 0, 0
         self.healthy_color = 0, 255, 0
         self.node_radius = 2
@@ -33,6 +33,12 @@ class NodeSystem:
             return np.concatenate((data, self.nodes[None, :, :]))
 
 
+    def interact():
+        pass
+
+
+    def infect():
+        pass
 
 
     # def drawNodes(self):
@@ -42,8 +48,8 @@ class NodeSystem:
 
     """Update position and reverse direction for all nodes with coordinates out of bounds"""
     def updatePosition(self):
-        self.nodes[:, [0,1]] += self.nodes[:, [3,4]]
-        self.nodes[self.nodes[:, 0] < 0, 3] *= (-1)
-        self.nodes[self.nodes[:, 0] > 1500, 3] *= (-1)
-        self.nodes[self.nodes[:, 1] < 0, 4] *= (-1)
-        self.nodes[self.nodes[:, 1] > 1000, 4] *= (-1)
+        self.nodes[:, [0,1]] += self.nodes[:, [2,3]]
+        self.nodes[self.nodes[:, 0] < 0, 2] *= (-1)
+        self.nodes[self.nodes[:, 0] > 1500, 2] *= (-1)
+        self.nodes[self.nodes[:, 1] < 0, 3] *= (-1)
+        self.nodes[self.nodes[:, 1] > 1000, 3] *= (-1)
