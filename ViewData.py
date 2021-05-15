@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import main
-import nodeSystem as ns
+#import nodeSystem as ns
 import matplotlib.animation as animation
 
 class AnimatedScatter(object):
@@ -24,41 +24,20 @@ class AnimatedScatter(object):
         data = self.data[i, :, :]
         # Set x and y data...
         self.scat.set_offsets(data[:, :2])
-        # Set sizes...
-        # self.scat.set_sizes(300 * abs(data[:, 2])**1.5 + 100)
+
         sizes = np.ones(data.shape[0])
         self.scat.set_sizes(sizes + 2)
-        # # Set colors..
         self.scat.set_array(data[:, 2])
 
         # We need to return the updated artist for FuncAnimation to draw..
         # Note that it expects a sequence of artists, thus the trailing comma.
         return self.scat,
 
-def init_animation():
-    fig, ax = plt.subplots()
-    scat = ax.scatter(data[(i-1)*pop:i*pop, 0], data[(i-1)*pop:i*pop, 1])
-    plt.title("Simulation visualization")
-
-
-def animate_plot(i, pop):
-    pass
-    # ax.scatter(data[(i-1)*pop:i*pop, 0], data[(i-1)*pop:i*pop, 1])
-
 def plot_nodes(pop, iterations):
-    # animation = FuncAnimation(fig, animate_plot,fargs=(pop,), frames=iterations, interval=20)
 
-    # data=np.genfromtxt("simlog.csv", delimiter=",")
     with open("simlog.npy", "rb") as f:
         data = np.load(f)
 
-    # a = data[:pop, :].copy()
-    # data = data.reshape((pop, 5, (data.shape[0]//pop)))
-    # print(a)
-    # print(data[:,:,0])
     ac = AnimatedScatter(data, pop)
-    # data = np.genfromtxt("simlog.csv", delimiter=",")
-    # for i in range(1,iterations):
-        # plt.scatter(data[(i-1)*pop:i*pop, 0], data[(i-1)*pop:i*pop, 1])
 
     plt.show()

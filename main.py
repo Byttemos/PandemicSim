@@ -19,7 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 from nodeSystem import NodeSystem as ns
 import numpy as np
-#from dataclasses import dataclass
 
 def callbacktest(nodesystem):
     #print(nodesystem.nodes)

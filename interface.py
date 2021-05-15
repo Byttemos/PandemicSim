@@ -6,7 +6,7 @@ import sys
 def run():
     runsim_button.configure(text="Running simulation...")
     main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get())
-    runsim_button.configure(text="Simulation competed!")
+    runsim_button.configure(text="Simulation completed!")
     view_results_button.grid(row=7, column=0)
 
 def view_results():
@@ -15,7 +15,7 @@ def view_results():
 #Instantiate root window
 root = Tk()
 
-welcomemsg = Label(root, text="Greetings from the PandemicSim dev team! \n Select population size")
+welcomemsg = Label(root, text="Greetings from the PandemicSim dev team! \n Select a population size")
 welcomemsg.grid(row=0, column=0)
 
 population_slider = Scale(root, from_=0, to=50000, orient=HORIZONTAL, label="Population:", length=220, resolution=200)
