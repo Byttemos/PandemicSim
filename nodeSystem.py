@@ -24,8 +24,8 @@ class NodeSystem:
         print(find_states)
 
         if find_states([8]): #if dead
-            dead_x_velocity = [:, 2] = 0
-            dead_y_velocity = [:, 3] = 0
+            dead_x_velocity = self.nodes[: ,2]= 0
+            dead_y_velocity = self.nodes[:, 3] = 0
             return self.dead
 
         if find_states([7]): #if vaccinated
@@ -46,17 +46,6 @@ class NodeSystem:
                 return self.sick_color_mask
             else: #no mask
                 return self.sick_color_no_mask
-
-
-
-
-
-
-
-
-            
-            
-            
 
 
     def collision_detection(self):
@@ -85,7 +74,7 @@ class NodeSystem:
     def interact(self, node):
         """Determine outcome of a collision between two nodes based on the nodes' properties"""
         for idx in node:
-            if self.nodes[node[idx]],4:
+            if self.nodes[node[idx], 4]:
                 infection_risk = 1
 
 
