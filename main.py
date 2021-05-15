@@ -32,6 +32,7 @@ def runSim(n, iteration_number, log_steps = 10, callback = callbacktest):
     data = np.zeros((1, 8))
     for i in range(iteration_number):
         nodesys.updatePosition()
+        nodesys.collision_detection()
 
         if (data == 0).all():
             data = nodesys.nodes
