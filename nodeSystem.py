@@ -1,6 +1,4 @@
 import numpy as np
-import pygame, sys
-
 
 class NodeSystem:
     def __init__(self, n):

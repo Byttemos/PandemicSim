@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import main
 import nodeSystem as ns
-from matplotlib.animation import FuncAnimation
 import matplotlib.animation as animation
 
 class AnimatedScatter(object):
