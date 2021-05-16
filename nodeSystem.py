@@ -1,8 +1,9 @@
 import numpy as np
 from scipy.spatial import distance_matrix
-
+# import interface
 class NodeSystem:
     def __init__(self, n):
+
         self.nodes = np.zeros((n, 9))
         self.nodes[:, [0, 1]] = np.random.randint([1500, 1000], size = (n, 2))
         self.nodes[:, [2, 3]] = np.random.randn(n, 2)
@@ -14,6 +15,9 @@ class NodeSystem:
         self.immune = 127, 0, 255
         self.dead = 0, 0, 0
         self.node_radius = 2
+        self.nodes[[-1], 4] = 1 #create patient zero as the last node in the array
+        # self.nodes[[range(vaxpercent)], 7] = 1 #set certain percentage of nodes to be vaccinated
+        self.infection_risk = 0.9
 
 
     def switch_state(self, row):
@@ -52,7 +56,7 @@ class NodeSystem:
     def collision_detection(self):
         dm = distance_matrix(self.nodes[:, :2], self.nodes[:, :2])
         collision_pairs = np.tril(list(zip(*np.where((dm < self.node_radius*2) & (dm != 0.0)))))
-        self.interact(collision_pairs)
+        # self.interact(collision_pairs[])
 
     def logData(self, data):
         """Write data to .npy file"""
@@ -64,20 +68,28 @@ class NodeSystem:
 
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
-        for i in collided_nodes:
-            print(i)
+        for collided_node in collided_nodes:
+            infection_risk = 50
+            mask_risk =0.8
+            if self.nodes[[collided_node[0]], 6:9].sum() >= 1 or self.nodes[[collided_node[1]], 6:9].sum() >= 1:
+                #check if any node is dead
+                pass
 
-
-            if self.nodes[i[0], 4] == 0:
-                print("THIS NODE IS HELFY")
+            elif  self.nodes[[collided_node[0]], 4] == 1 and self.nodes[[collided_node[1]], 4] == 1:
+                #check if both nodes are sick as fuck bruh
+                pass
+            elif  self.nodes[[collided_node[0]], 4] == 0 and self.nodes[[collided_node[1]], 4] == 0:
+                #check if both nodes are healthy
+                pass
             else:
-                print("DIS NOTE GUNNA DIE")
-
-
-    def infect(node):
-        """Spread infection from one node to a collided node. receives sliced array of nodes to be infected"""
-        pass
-
+                infection = np.random.rand()
+                instance_risk = self.infection_risk + self.nodes[[collided[1]], 5]/100 + self.nodes[[collided[0]], 5]/100
+                if infection > instance_risk:
+                    pass
+                if self.nodes[[collided_node[0]], 4] == 0:
+                    self.nodes[[collided_node[1]], 4] == 1
+                else:
+                    self.nodes[[collided_node[0]], 4] == 1
 
 
     def updatePosition(self):

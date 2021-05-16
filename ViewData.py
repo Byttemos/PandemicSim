@@ -32,12 +32,11 @@ class AnimatedScatter(object):
         # We need to return the updated artist for FuncAnimation to draw..
         # Note that it expects a sequence of artists, thus the trailing comma.
         return self.scat,
-
+        self.ax.text(1, 1, "Deathcount: " + sum(self.data[:,:,8]))
 def plot_nodes(pop, iterations):
 
     with open("simlog.npy", "rb") as f:
         data = np.load(f)
 
     ac = AnimatedScatter(data, pop)
-
     plt.show()

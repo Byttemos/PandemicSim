@@ -40,6 +40,6 @@ def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_s
 
         if callback:
             callback(nodesys)
-
+    print("Infected ppl: ", nodesys.nodes[:, 4].sum())
     with open("simlog.npy", "wb") as f:
         np.save(f, data)

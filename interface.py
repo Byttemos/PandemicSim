@@ -9,6 +9,7 @@ def run():
     runsim_button.configure(text="Complete Simulation")
     view_results_button.grid(row=8, column=0)
 
+
 def view_results():
 
     ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
