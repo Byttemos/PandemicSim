@@ -4,14 +4,14 @@ import sys
 
 
 def run():
-    runsim_button.configure(text="Running simulation...")
-    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get())
-    runsim_button.configure(text="Simulation completed!")
+    runsim_button.configure(text="Running Simulation...")
+    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_slider())
+    runsim_button.configure(text="Complete Simulation")
     view_results_button.grid(row=7, column=0)
 
 def view_results():
 
-    ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
+    ViewData.plot_nodes(population_slider.get(), iteration_slider.get(), mortality_slider())
 #Instantiate root window
 root = Tk()
 
@@ -30,8 +30,11 @@ vaccer_slider.grid(row=3, column=0)
 iteration_slider = Scale(root, from_=0, to=10000, orient=HORIZONTAL, label="Iterations:", length=220, resolution=10)
 iteration_slider.grid(row=4, column=0)
 
+mortality_slider = Scale(root, from_=0, to=5, orient=HORIZONTAL, label="Mortality rate:", length=220, resolution=0.1)
+mortality_slider.grid(row=5, column=0)
+
 runsim_button = Button(root, text="Run Simulation", bg="#82ff63", command=run)
-runsim_button.grid(row=5, column=0)
+runsim_button.grid(row=6, column=0)
 
 view_results_button = Button(root, text="View Results", bg="#0096FF", command=view_results)
 
