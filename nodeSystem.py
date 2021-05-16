@@ -49,7 +49,8 @@ class NodeSystem:
 
     def collision_detection(self):
         dm = distance_matrix(self.nodes[:, :2], self.nodes[:, :2])
-        self.interact(np.where((dm < self.node_radius*2) & (dm != 0,0)))
+        collision_pairs = np.tril(list(zip(*np.where((dm < self.node_radius*2) & (dm != 0.0)))))
+        self.interact(collision_pairs)
 
     def logData(self, data):
         """Write data to .npy file"""
@@ -61,7 +62,7 @@ class NodeSystem:
 
     def interact(self, node):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
-        print(node)
+        print(tuple(node))
 
 
     def infect(node):
