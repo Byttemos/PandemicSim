@@ -1,0 +1,6 @@
+
+*.pyc
+__pycache__/main.cpython-39.pyc
+__pycache__/nodeSystem.cpython-39.pyc
+*.pyc
+*.pyc
