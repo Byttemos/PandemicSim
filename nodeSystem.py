@@ -65,7 +65,10 @@ class NodeSystem:
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
         for i in collided_nodes:
-            if not self.nodes[collided_nodes[i][0], 4]:
+            print(i)
+
+
+            if self.nodes[i[0], 4] == 0:
                 print("THIS NODE IS HELFY")
             else:
                 print("DIS NOTE GUNNA DIE")
