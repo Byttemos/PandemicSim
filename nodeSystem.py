@@ -1,5 +1,4 @@
 import numpy as np
-import pygame, sys
 from scipy.spatial import distance_matrix
 
 class NodeSystem:
@@ -52,18 +51,7 @@ class NodeSystem:
 
     def collision_detection(self):
         dm = distance_matrix(self.nodes[:, :2], self.nodes[:, :2])
-        self.interact(np.where((dm < self.node_radius*2) & (dm != 0,0)[0]))
-
-
-        
-
-    def addNode(self, coords = None):
-        """DEPRECATED! add node to node system"""
-        coords = coords if coords else np.random.randint([self.screen.get_width(),
-                                                          self.screen.get_height()])
-        row = np.array([*coords, 0, 1])
-        self.nodes = np.vstack((self.nodes, row))
-
+        self.interact(np.where((dm < self.node_radius*2) & (dm != 0,0)))
 
     def logData(self, data):
         """Write data to .npy file"""
@@ -74,22 +62,14 @@ class NodeSystem:
 
 
     def interact(self, node):
-        """Determine outcome of a collision between two nodes based on the nodes' properties"""
-        for idx in node:
-            if self.nodes[node[idx], 4]:
-                infection_risk = 1
-
+        """Determine outcome of a collision between two nodes based on the nodes' propertie"""
+        print(node)
 
 
     def infect(node):
         """Spread infection from one node to a collided node. receives sliced array of nodes to be infected"""
         pass
 
-
-    # def drawNodes(self):
-
-        # for row in self.nodes:
-            # pygame.draw.circle(self.screen, self.color(row), row[[0,1]], self.node_radius, 0)
 
 
     def updatePosition(self):
