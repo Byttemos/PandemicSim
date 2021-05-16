@@ -62,9 +62,13 @@ class NodeSystem:
             return np.concatenate((data, self.nodes[None, :, :]))
 
 
-    def interact(self, node):
+    def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
-        print(tuple(node))
+        for i in collided_nodes:
+            if not self.nodes[collided_nodes[i][0], 4]:
+                print("THIS NODE IS HELFY")
+            else:
+                print("DIS NOTE GUNNA DIE")
 
 
     def infect(node):
