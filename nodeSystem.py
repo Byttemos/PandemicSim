@@ -33,6 +33,8 @@ class NodeSystem:
 
         if find_states([6]): #if immune
             #Pause collision contagion for given amount of time
+            self.immune 
+            time.sleep(5)
             return self.immune
 
         if not find_states([4]): #if healthy
