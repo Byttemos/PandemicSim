@@ -48,20 +48,9 @@ class NodeSystem:
                 return self.sick_color_no_mask
 
 
-
-
-
-
-
-
-            
-            
-            
-
-
     def collision_detection(self):
         dm = distance_matrix(self.nodes[:, :2], self.nodes[:, :2])
-        self.interact(np.where((dm < self.node_radius*2) & (dm != 0,0)[0]))
+        self.interact(np.where((dm < self.node_radius*2) & (dm != 0,0)))
 
 
         
@@ -84,10 +73,7 @@ class NodeSystem:
 
     def interact(self, node):
         """Determine outcome of a collision between two nodes based on the nodes' properties"""
-        for idx in node:
-            if self.nodes[node[idx]],4:
-                infection_risk = 1
-
+        print(node.shape)
 
 
     def infect(node):
