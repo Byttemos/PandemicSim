@@ -29,7 +29,7 @@ vaccer_slider =Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Number of 
 vaccer_slider.grid(row=3, column=0)
 
 mortality_msg = Label(root, text="Insert mortality rate")
-mortality_msg.grid(row=4, column=0, sticky=W)
+mortality_msg.grid(row=4, column=0, sticky=W, padx=10)
 mortality_textfield = Entry(root,)
 mortality_textfield.grid(row=5, column=0, padx=5, pady=5, sticky="")
 mortality_textfield.insert(0, "2.07")
