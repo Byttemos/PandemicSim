@@ -9,6 +9,7 @@ def run():
     runsim_button.configure(text="Complete Simulation")
     view_results_button.grid(row=8, column=0)
 
+
 def view_results():
 
     ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
@@ -28,9 +29,9 @@ vaccer_slider =Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Number of 
 vaccer_slider.grid(row=3, column=0)
 
 mortality_msg = Label(root, text="Insert mortality rate")
-mortality_msg.grid(row=4, column=0)
-mortality_textfield = Entry(root, width=35)
-mortality_textfield.grid(row=5, column=0)
+mortality_msg.grid(row=4, column=0, sticky=W, padx=10)
+mortality_textfield = Entry(root,)
+mortality_textfield.grid(row=5, column=0, padx=10, sticky=W)
 mortality_textfield.insert(0, "2.07")
 mortality_rate_as_float = float(mortality_textfield.get())
 
