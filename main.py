@@ -21,8 +21,8 @@ from nodeSystem import NodeSystem as ns
 import numpy as np
 
 def callbacktest(nodesystem):
-    #print(nodesystem.nodes)
-    pass
+    print(nodesystem.nodes[:, 4].sum())
+
 def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_steps = 10, callback = callbacktest):
 
     nodesys = ns(n)
