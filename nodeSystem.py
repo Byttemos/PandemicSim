@@ -15,7 +15,7 @@ class NodeSystem:
         self.immune = 127, 0, 255
         self.dead = 0, 0, 0
         self.node_radius = 2
-        self.nodes[[-1], 4] = 1 #create patient zero as the last node in the array
+        self.nodes[:self.nodes.shape[0]//4, 4] = 1 #create patient zero as the last node in the array
         # self.nodes[[range(vaxpercent)], 7] = 1 #set certain percentage of nodes to be vaccinated
         self.infection_risk = 0.9
 
@@ -24,7 +24,6 @@ class NodeSystem:
         """4 = Healthy bool, 5 = Mask bool, 6 = Immune, 7 = Vaccinated, 8 = Dead"""
         states = np.array([4,5,6,7,8])
         find_states = np.where(nodes== 1)
-        print(find_states)
 
         if find_states([8]): #if dead
             dead_x_velocity = self.nodes[: ,2]= 0
@@ -54,9 +53,9 @@ class NodeSystem:
 
 
     def collision_detection(self):
-        dm = distance_matrix(self.nodes[:, :2], self.nodes[:, :2])
-        collision_pairs = np.tril(list(zip(*np.where((dm < self.node_radius*2) & (dm != 0.0)))))
-        # self.interact(collision_pairs[])
+        dm = np.tril(distance_matrix(self.nodes[:, :2], self.nodes[:, :2]))
+        collision_pairs = list(zip(*np.where((dm < self.node_radius*2) & (dm != 0.0))))
+        self.interact(collision_pairs)
 
     def logData(self, data):
         """Write data to .npy file"""
@@ -68,28 +67,28 @@ class NodeSystem:
 
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
-        for collided_node in collided_nodes:
+        for first, second in collided_nodes:
             infection_risk = 50
             mask_risk =0.8
-            if self.nodes[[collided_node[0]], 6:9].sum() >= 1 or self.nodes[[collided_node[1]], 6:9].sum() >= 1:
+            if self.nodes[[first], 6:9].sum() >= 1 or self.nodes[[second], 6:9].sum() >= 1:
                 #check if any node is dead
                 pass
-
-            elif  self.nodes[[collided_node[0]], 4] == 1 and self.nodes[[collided_node[1]], 4] == 1:
+            elif  self.nodes[[first], 4] == 1 and self.nodes[[second], 4] == 1:
                 #check if both nodes are sick as fuck bruh
                 pass
-            elif  self.nodes[[collided_node[0]], 4] == 0 and self.nodes[[collided_node[1]], 4] == 0:
+            elif  self.nodes[[first], 4] == 0 and self.nodes[[second], 4] == 0:
                 #check if both nodes are healthy
                 pass
             else:
                 infection = np.random.rand()
-                instance_risk = self.infection_risk + self.nodes[[collided[1]], 5]/100 + self.nodes[[collided[0]], 5]/100
-                if infection > instance_risk:
-                    pass
-                if self.nodes[[collided_node[0]], 4] == 0:
-                    self.nodes[[collided_node[1]], 4] == 1
-                else:
-                    self.nodes[[collided_node[0]], 4] == 1
+                instance_risk = self.infection_risk + self.nodes[[second], 5]/100 + self.nodes[[first], 5]/100
+                instance_risk = instance_risk[0]
+                if not infection > instance_risk:
+                    if self.nodes[first, 4] == 0:
+                        self.nodes[first, 4] = 1
+                    else:
+                        self.nodes[second, 4] = 1
+
 
 
     def updatePosition(self):
