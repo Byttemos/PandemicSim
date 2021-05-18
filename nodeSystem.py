@@ -3,9 +3,9 @@ from scipy.spatial import distance_matrix
 # import interface
 class NodeSystem:
     def __init__(self, n):
-
-        self.nodes = np.zeros((n, 9))
-        self.nodes[:, [0, 1]] = np.random.randint([1500, 1000], size = (n, 2))
+        """0: xpos, 1:ypos, 2: Vx, 3: Vy, 4: sick, 5:mask, 6: immune, 7: vaxxed, 8: ded, 9: sick counter"""
+        self.nodes = np.zeros((n, 10))
+        self.nodes[:, [0, 1]] = np.random.randint([500, 500], size = (n, 2))
         self.nodes[:, [2, 3]] = np.random.randn(n, 2)
         self.healthy_color_mask = 0, 103, 0
         self.healthy_color_no_mask = 0, 255, 0
@@ -15,7 +15,8 @@ class NodeSystem:
         self.immune = 127, 0, 255
         self.dead = 0, 0, 0
         self.node_radius = 2
-        self.nodes[:self.nodes.shape[0]//4, 4] = 1 #create patient zero as the last node in the array
+        # self.nodes[:self.nodes.shape[0]//4, 4] = 1 #create patient zero as the last node in the array
+        self.nodes[0, 4] = 1 #create patient zero
         # self.nodes[[range(vaxpercent)], 7] = 1 #set certain percentage of nodes to be vaccinated
         self.infection_risk = 0.9
 
@@ -68,8 +69,8 @@ class NodeSystem:
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
         for first, second in collided_nodes:
-            infection_risk = 50
-            mask_risk =0.8
+            # infection_risk = 50
+            # mask_risk =0.8
             if self.nodes[[first], 6:9].sum() >= 1 or self.nodes[[second], 6:9].sum() >= 1:
                 #check if any node is dead
                 pass
@@ -95,6 +96,15 @@ class NodeSystem:
         """Increment all node positions and reverse velocity if node is out of bounds"""
         self.nodes[:, [0,1]] += self.nodes[:, [2,3]]
         self.nodes[self.nodes[:, 0] < 0, 2] *= (-1)
-        self.nodes[self.nodes[:, 0] > 1500, 2] *= (-1)
+        self.nodes[self.nodes[:, 0] > 500, 2] *= (-1)
         self.nodes[self.nodes[:, 1] < 0, 3] *= (-1)
-        self.nodes[self.nodes[:, 1] > 1000, 3] *= (-1)
+        self.nodes[self.nodes[:, 1] > 500, 3] *= (-1)
+        """increment sick counter until 140 (14 days) and determine whether the node dies or becomes immune"""
+        self.nodes[self.nodes[:, 4] == 1, 9] += 1
+        death_risk = np.random.randint(100)
+        if death_risk <= 2:
+            self.nodes[self.nodes[:, 9] == 400, 4] = 0
+            self.nodes[self.nodes[:, 9] == 400, 8] = 1
+        else:
+            self.nodes[self.nodes[:, 9] == 400, 4] = 0
+            self.nodes[self.nodes[:, 9] == 400, 6] = 1
