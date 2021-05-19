@@ -1,3 +1,4 @@
+from tkinter import Label
 import numpy as np
 import matplotlib.pyplot as plt
 import main
@@ -33,10 +34,12 @@ class AnimatedScatter(object):
         sizes = np.ones(data.shape[0])
         self.scat.set_sizes(sizes + 30)
         self.scat.set_array(data[:, 2])
-        # We need to return the updated artist for FuncAnimation to draw..
-        # Note that it expects a sequence of artists, thus the trailing comma.
+        
+        
+        self.data[self.data[:, 4] == 1] = self.scat.set_color("red")
+        
         return self.scat,
-        self.ax.text(1, 1, "Deathcount: " + sum(self.data[:,:,8]))
+        #self.ax.text(1, 1, "Deathcount: " + sum(self.data[:,:,8]))
 
 def plot_nodes(pop, iterations):
 
@@ -52,10 +55,11 @@ def show_graph(iterations):
         data = np.load(f)
     # print(data[:, :, 4].sum())
     gwaf = data.sum(axis = 1)
-    plt.plot(gwaf[:,4])
-    plt.plot(gwaf[:, 8])
-    plt.plot(gwaf[:, 6])
+    plt.plot(gwaf[:,4], color="red")
+    plt.plot(gwaf[:, 8], color="black")
+    plt.plot(gwaf[:, 6], color="magenta")
     plt.xlabel("Days")
+    plt.legend(["Infected", "Dead", "Immune"], loc="lower right")
     # print(gwaf)
     # plt.plot(gwaf, iterations)
     plt.show()
