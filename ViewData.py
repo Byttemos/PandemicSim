@@ -35,8 +35,10 @@ class AnimatedScatter(object):
         self.scat.set_sizes(sizes + 30)
         self.scat.set_array(data[:, 2])
         
-        
-        self.data[self.data[:, 4] == 1] = self.scat.set_color("red")
+        """
+        if np.any(self.data[:, 4] == 1):
+            self.scat.set_color("red")
+        """
         
         return self.scat,
         #self.ax.text(1, 1, "Deathcount: " + sum(self.data[:,:,8]))
