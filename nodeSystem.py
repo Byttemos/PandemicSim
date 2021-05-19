@@ -69,8 +69,7 @@ class NodeSystem:
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' propertie"""
         for first, second in collided_nodes:
-            # infection_risk = 50
-            # mask_risk =0.8
+            
             if self.nodes[[first], 6:9].sum() >= 1 or self.nodes[[second], 6:9].sum() >= 1:
                 #check if any node is dead
                 pass
@@ -108,3 +107,4 @@ class NodeSystem:
         else:
             self.nodes[self.nodes[:, 9] == 400, 4] = 0
             self.nodes[self.nodes[:, 9] == 400, 6] = 1
+ 
