@@ -7,12 +7,18 @@ def run():
     runsim_button.configure(text="Running Simulation...")
     main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_rate_as_float)
     runsim_button.configure(text="Complete Simulation")
-    view_results_button.grid(row=8, column=0)
+    view_results_graph_button.grid(row=8, column=0)
+    view_results_scatter_button.grid(row=9, column=0)
 
 
-def view_results():
+def view_results_graph():
 
     ViewData.show_graph(iteration_slider.get())
+
+def view_results_scatter():
+
+    ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
+    
 #Instantiate root window
 root = Tk()
 
@@ -41,10 +47,12 @@ iteration_slider.grid(row=6, column=0)
 runsim_button = Button(root, text="Run Simulation", bg="#82ff63", command=run)
 runsim_button.grid(row=7, column=0)
 
-view_results_button = Button(root, text="View Results", bg="#0096FF", command=view_results)
+view_results_graph_button = Button(root, text="View Results", bg="#0096FF", command=view_results_graph)
 
-exit_button = Button(root, text="Exit application", bg="#FF0000",command= lambda: sys.exit())
-exit_button.grid(row=9, column=0)
+view_results_scatter_button = Button(root, text="View Scatter Plot", bg="#0096FF", command=view_results_scatter)
+
+exit_button = Button(root, text="Exit Application", bg="#FF0000",command= lambda: sys.exit())
+exit_button.grid(row=10, column=0)
 
 #Run loop of root window
 root.mainloop()
