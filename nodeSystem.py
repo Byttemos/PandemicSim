@@ -13,7 +13,7 @@ class NodeSystem:
         self.nodes[-1, 4] = 1 #create patient zero
         masks = (int(n/100))*int(mask_procent)
         self.nodes[[range(masks)], 5] = 1 #give people masks
-        self.infection_risk = 0.50
+        self.infection_risk = 0.70
 
 
 
@@ -70,6 +70,8 @@ class NodeSystem:
         self.nodes[mask, 8] = 1
         self.nodes[mask, 4] = 0
         self.nodes[mask, 9] = 0
+        self.nodes[mask, 2] = 0
+        self.nodes[mask, 3] = 0
         # survivor_nodes = self.nodes[self.nodes[:, 10] > self.mortality_rate]
         survivor_nodes = np.where((self.nodes[:, 10] > self.mortality_rate) & (self.nodes[:,9] == 336), True, False)
         self.nodes[survivor_nodes, 4] = 0
