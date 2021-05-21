@@ -21,11 +21,11 @@ from nodeSystem import NodeSystem as ns
 import numpy as np
 
 def callbacktest(nodesystem):
-    #print(nodesystem.nodes)
-    pass
-def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_steps = 10, callback = callbacktest):
+    print(nodesystem.nodes[:, 4].sum())
 
-    nodesys = ns(n)
+def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_steps = 10, callback = None):
+
+    nodesys = ns(n, mask_procent, vac_procent, mortality_rate)
 
     data = np.zeros((1, 8))
     for i in range(iteration_number):
@@ -40,6 +40,9 @@ def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_s
 
         if callback:
             callback(nodesys)
+
+
+    #print("Infected ppl: ", nodesys.nodes[:, 4].sum())
 
     with open("simlog.npy", "wb") as f:
         np.save(f, data)
