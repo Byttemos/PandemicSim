@@ -45,7 +45,7 @@ class NodeSystem:
                 pass
             else:
                 infection = np.random.rand()
-                instance_risk = self.infection_risk + self.nodes[[second], 5]/100 + self.nodes[[first], 5]/100
+                instance_risk = self.infection_risk - self.nodes[[second], 5]/10 - self.nodes[[first], 5]/10
                 instance_risk = instance_risk[0]
                 if not infection > instance_risk:
                     if self.nodes[first, 4] == 0:
@@ -75,5 +75,8 @@ class NodeSystem:
         # survivor_nodes = self.nodes[self.nodes[:, 10] > self.mortality_rate]
         survivor_nodes = np.where((self.nodes[:, 10] > self.mortality_rate) & (self.nodes[:,9] == 336), True, False)
         self.nodes[survivor_nodes, 4] = 0
+        self.nodes[survivor_nodes, 9] = 0
         self.nodes[survivor_nodes, 6] = 1
-        self.nodes[self.nodes[:, 11] == 4380, 6] = 0
+
+        # self.nodes[self.nodes[:, 11] == 4380, 6] = 0
+        self.nodes[self.nodes[:, 11] == 500, 6] = 0
