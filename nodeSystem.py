@@ -8,7 +8,6 @@ class NodeSystem:
         self.nodes[:, [0, 1]] = np.random.randint([500, 500], size = (n, 2))
         self.nodes[:, [2, 3]] = np.random.randn(n, 2)
         self.nodes[:, 10] = np.random.randint(100, size = n)
-        print(self.nodes[:, 10])
         self.healthy_color_mask = 0, 103, 0
         self.healthy_color_no_mask = 0, 255, 0
         self.sick_color_mask = 255, 100, 240
@@ -18,13 +17,10 @@ class NodeSystem:
         self.dead = 0, 0, 0
         self.node_radius = 2
         self.mortality_rate = mortality_rate
-        # self.nodes[[range(mask_procent)], 5] = 1
         self.nodes[-1, 4] = 1 #create patient zero
-        # self.nodes[[range(vaxpercent)], 7] = 1 #set certain percentage of nodes to be vaccinated
-        print("is there a patient zero in the house? " + str(self.nodes[:,4].sum()))
-        self.nodes[[(range(len(self.nodes)/100)*mask_procent)], 5] = 1
+        masks = (int(n/100))*int(mask_procent)
+        self.nodes[[range(masks)], 5] = 1 #give people masks
         self.infection_risk = 0.9
-        print(self.nodes[:, 5].sum())
 
     def switch_state(self, row):
         """4 = Healthy bool, 5 = Mask bool, 6 = Immune, 7 = Vaccinated, 8 = Dead"""
@@ -114,4 +110,3 @@ class NodeSystem:
         self.nodes[survivor_nodes, 4] = 0
         self.nodes[survivor_nodes, 6] = 1
 
-        print("is there a patient zero in the house? " + str(self.nodes[:,4].sum()))

@@ -63,6 +63,7 @@ def show_graph(iterations):
     plt.plot(gwaf[:, 6], color="magenta")
     plt.xlabel("Days")
     plt.legend(["Infected", "Dead", "Immune"], loc="lower right")
+    plt.ylim([0,100])
     # print(gwaf)
     # plt.plot(gwaf, iterations)
     plt.show()
