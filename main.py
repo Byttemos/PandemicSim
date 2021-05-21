@@ -25,7 +25,7 @@ def callbacktest(nodesystem):
 
 def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_steps = 10, callback = None):
 
-    nodesys = ns(n)
+    nodesys = ns(n, mask_procent, vac_procent, mortality_rate)
 
     data = np.zeros((1, 8))
     for i in range(iteration_number):

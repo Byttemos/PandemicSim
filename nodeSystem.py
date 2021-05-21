@@ -2,11 +2,13 @@ import numpy as np
 from scipy.spatial import distance_matrix
 # import interface
 class NodeSystem:
-    def __init__(self, n):
-        """0: xpos, 1:ypos, 2: Vx, 3: Vy, 4: sick, 5:mask, 6: immune, 7: vaxxed, 8: ded, 9: sick counter"""
-        self.nodes = np.zeros((n, 10))
+    def __init__(self, n, mask_procent, vac_procent, mortality_rate):
+        """0: xpos, 1:ypos, 2: Vx, 3: Vy, 4: sick, 5:mask, 6: immune, 7: vaxxed, 8: ded, 9: sick counter, 10: are you gonna fucking die?"""
+        self.nodes = np.zeros((n, 11))
         self.nodes[:, [0, 1]] = np.random.randint([500, 500], size = (n, 2))
         self.nodes[:, [2, 3]] = np.random.randn(n, 2)
+        self.nodes[:, 10] = np.random.randint(100, size = n)
+        print(self.nodes[:, 10])
         self.healthy_color_mask = 0, 103, 0
         self.healthy_color_no_mask = 0, 255, 0
         self.sick_color_mask = 255, 100, 240
@@ -15,11 +17,14 @@ class NodeSystem:
         self.immune = 127, 0, 255
         self.dead = 0, 0, 0
         self.node_radius = 2
-        # self.nodes[:self.nodes.shape[0]//4, 4] = 1 #create patient zero as the last node in the array
-        self.nodes[0, 4] = 1 #create patient zero
+        self.mortality_rate = mortality_rate
+        # self.nodes[[range(mask_procent)], 5] = 1
+        self.nodes[-1, 4] = 1 #create patient zero
         # self.nodes[[range(vaxpercent)], 7] = 1 #set certain percentage of nodes to be vaccinated
+        print("is there a patient zero in the house? " + str(self.nodes[:,4].sum()))
+        self.nodes[[range(mask_procent)], 5] = 1
         self.infection_risk = 0.9
-
+        print(self.nodes[:, 5].sum())
 
     def switch_state(self, row):
         """4 = Healthy bool, 5 = Mask bool, 6 = Immune, 7 = Vaccinated, 8 = Dead"""
@@ -101,10 +106,13 @@ class NodeSystem:
         self.nodes[self.nodes[:, 1] > 500, 3] *= (-1)
         """increment sick counter until 140 (14 days) and determine whether the node dies or becomes immune"""
         self.nodes[self.nodes[:, 4] == 1, 9] += 1
-        death_risk = np.random.randint(100)
-        if death_risk <= 2:
-            self.nodes[self.nodes[:, 9] == 400, 4] = 0
-            self.nodes[self.nodes[:, 9] == 400, 8] = 1
-        else:
-            self.nodes[self.nodes[:, 9] == 400, 4] = 0
-            self.nodes[self.nodes[:, 9] == 400, 6] = 1
+        # death_nodes = self.nodes[self.nodes[:, 10] <= 50]
+        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == 400), True, False)
+        self.nodes[mask, 8] = 1
+        self.nodes[mask, 4] = 0
+        # survivor_nodes = self.nodes[self.nodes[:, 10] > self.mortality_rate]
+        survivor_nodes = np.where((self.nodes[:, 10] > self.mortality_rate) & (self.nodes[:,9] == 400), True, False)
+        self.nodes[survivor_nodes, 4] = 0
+        self.nodes[survivor_nodes, 6] = 1
+
+        print("is there a patient zero in the house? " + str(self.nodes[:,4].sum()))
