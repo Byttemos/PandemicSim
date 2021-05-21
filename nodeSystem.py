@@ -22,7 +22,7 @@ class NodeSystem:
         self.nodes[-1, 4] = 1 #create patient zero
         # self.nodes[[range(vaxpercent)], 7] = 1 #set certain percentage of nodes to be vaccinated
         print("is there a patient zero in the house? " + str(self.nodes[:,4].sum()))
-        self.nodes[[range(mask_procent)], 5] = 1
+        self.nodes[[(range(len(self.nodes)/100)*mask_procent)], 5] = 1
         self.infection_risk = 0.9
         print(self.nodes[:, 5].sum())
 
