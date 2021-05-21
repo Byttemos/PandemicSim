@@ -66,3 +66,5 @@ def show_graph(iterations):
     # print(gwaf)
     # plt.plot(gwaf, iterations)
     plt.show()
+
+

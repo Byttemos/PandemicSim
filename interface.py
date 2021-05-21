@@ -27,12 +27,15 @@ welcomemsg.grid(row=0, column=0)
 
 population_slider = Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Population:", length=220, resolution=10)
 population_slider.grid(row=1, column=0)
+population_slider.set(50)
 
 masks_slider = Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Number of people with masks ( IN %):", length=220, resolution=5)
 masks_slider.grid(row=2, column=0)
+masks_slider.set(20)
 
 vaccer_slider =Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Number of people vaccinated ( IN %):", length=220, resolution=5)
 vaccer_slider.grid(row=3, column=0)
+vaccer_slider.set(20)
 
 mortality_msg = Label(root, text="Insert mortality rate")
 mortality_msg.grid(row=4, column=0, sticky=W, padx=10)
@@ -43,6 +46,7 @@ mortality_rate_as_float = float(mortality_textfield.get())
 
 iteration_slider = Scale(root, from_=0, to=10000, orient=HORIZONTAL, label="Iterations:", length=220, resolution=10)
 iteration_slider.grid(row=6, column=0)
+iteration_slider.set(2000)
 
 runsim_button = Button(root, text="Run Simulation", bg="#82ff63", command=run)
 runsim_button.grid(row=7, column=0)
