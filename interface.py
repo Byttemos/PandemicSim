@@ -10,6 +10,7 @@ def run():
     view_results_graph_button.grid(row=8, column=0)
     view_results_scatter_button.grid(row=9, column=0)
 
+
 def view_results_graph():
 
     ViewData.show_graph(iteration_slider.get())
@@ -49,6 +50,8 @@ iteration_slider.set(4000)
 
 runsim_button = tk.Button(root, text="Run Simulation", bg="#82ff63", command=run)
 runsim_button.grid(row=7, column=0)
+
+
 
 view_results_graph_button = tk.Button(root, text="View Results", bg="#0096FF", command=view_results_graph)
 
