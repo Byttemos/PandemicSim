@@ -1,5 +1,5 @@
 import main, ViewData
-from tkinter import *
+import tkinter as tk
 import sys
 
 
