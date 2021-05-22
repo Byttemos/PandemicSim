@@ -37,7 +37,7 @@ vaccer_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Num
 vaccer_slider.grid(row=3, column=0)
 vaccer_slider.set(20)
 
-mortality_slider = tk.Scale(root, from_=0, to=10, orient=tk.HORIZONTAL, label="Mortality rate:", length=150, resolution=0.1)
+mortality_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Mortality rate:", length=150, resolution=0.1)
 mortality_slider.grid(row=4, column=0)
 mortality_slider.set(2)
 """mortality_msg = tk.Label(root, text="Insert mortality rate")
@@ -80,7 +80,7 @@ def get_iterations():
     return iteration_slider.get()
 
 def get_mortality_rate():
-    return mortality_.get()
+    return mortality_slider.get()
 
 #Run loop of root window
 root.mainloop()
