@@ -14,7 +14,9 @@ class NodeSystem:
         masks = (int(n/100))*int(mask_procent)
         self.nodes[[range(masks)], 5] = 1 #give people masks
         self.infection_risk = 0.70
-
+        self.window_size = (500, 500)
+        self.infection_period = 336 #iterations
+        self.immune_period = 500 #iterations
 
 
     def collision_detection(self):
@@ -81,3 +83,25 @@ class NodeSystem:
         # self.nodes[self.nodes[:, 11] == 4380, 6] = 0
         self.nodes[self.nodes[:, 11] == 500, 6] = 0
 
+
+
+
+"""Helper funcs"""
+
+def get_radius():
+    return self.node_radius
+
+def get_speed():
+    return self.node[2, 3]
+
+def get_size():
+    return self.window_size
+
+def get_infection_risk():
+    return self.infection_risk
+
+def get_infection_period():
+    return self.infection_period
+
+def get_immune_period():
+    return self.immune_period

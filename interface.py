@@ -1,23 +1,22 @@
-import main, ViewData
 import tkinter as tk
 import sys
 
 
-def run():
-    runsim_button.configure(text="Running Simulation...")
-    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_rate_as_float)
-    runsim_button.configure(text="Complete Simulation")
-    view_results_graph_button.grid(row=8, column=0)
-    view_results_scatter_button.grid(row=9, column=0)
+# def run():
+#     runsim_button.configure(text="Running Simulation...")
+#     main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_rate_as_float)
+#     runsim_button.configure(text="Complete Simulation")
+#     view_results_graph_button.grid(row=8, column=0)
+#     view_results_scatter_button.grid(row=9, column=0)
 
 
-def view_results_graph():
+# def view_results_graph():
 
-    ViewData.show_graph(iteration_slider.get())
+#     ViewData.show_graph(iteration_slider.get())
 
-def view_results_scatter():
+# def view_results_scatter():
 
-    ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
+#     ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
     
 #Instantiate root window
 root = tk.Tk()
@@ -76,7 +75,7 @@ def get_iterations():
     return iteration_slider.get()
 
 def get_mortality_rate():
-    return mortality_textfield.get()
+    return float(mortality_textfield.get())
 
 #Run loop of root window
 root.mainloop()
