@@ -5,7 +5,7 @@ import sys
 
 def run():
     runsim_button.configure(text="Running Simulation...")
-    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(),mortality_textfield.get(), mortality_rate_as_float)
+    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_rate_as_float)
     runsim_button.configure(text="Complete Simulation")
     view_results_graph_button.grid(row=8, column=0)
     view_results_scatter_button.grid(row=9, column=0)
@@ -41,12 +41,8 @@ mortality_msg = tk.Label(root, text="Insert mortality rate")
 mortality_msg.grid(row=4, column=0)
 mortality_textfield = tk.Entry(root,)
 mortality_textfield.grid(row=5, column=0)
-tk.Entry.insert(mortality_textfield, 0,2.7)
-
-#mortality_textfield.insert(0, "100")
-
+mortality_textfield.insert(0, "2.7")
 mortality_rate_as_float = float(mortality_textfield.get())
-
 
 iteration_slider = tk.Scale(root, from_=0, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=10)
 iteration_slider.grid(row=6, column=0)
