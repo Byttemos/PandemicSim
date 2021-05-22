@@ -84,7 +84,5 @@ class NodeSystem:
         self.nodes[survivor_nodes, 4] = 0
         self.nodes[survivor_nodes, 9] = 0
         self.nodes[survivor_nodes, 6] = 1
-
-        # self.nodes[self.nodes[:, 11] == 4380, 6] = 0
         self.nodes[self.nodes[:, 11] == 500, 6] = 0
-
+        self.nodes[self.nodes[:, 11] == 500, 11] = 0
