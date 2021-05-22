@@ -5,18 +5,20 @@ import sys
 
 def run():
     runsim_button.configure(text="Running Simulation...")
-    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_slider.get())
-    runsim_button.configure(text="Complete Simulation")
+    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), mortality_slider.get())
+    runsim_button.configure(text="Done!")
     view_results_graph_button.grid(row=7, column=0)
     view_results_scatter_button.grid(row=8, column=0)
 
 
 def view_results_graph():
 
+    runsim_button.configure(text="Run Simulation")
     ViewData.show_graph(iteration_slider.get())
 
 def view_results_scatter():
 
+    runsim_button.configure(text="Run Simulation")
     ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
     
 #Instantiate root window
@@ -33,20 +35,9 @@ masks_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Numb
 masks_slider.grid(row=2, column=0)
 masks_slider.set(20)
 
-vaccer_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Number of people vaccinated ( IN %):", length=220, resolution=5)
-vaccer_slider.grid(row=3, column=0)
-vaccer_slider.set(20)
-
 mortality_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Mortality rate:", length=150, resolution=0.1)
 mortality_slider.grid(row=4, column=0)
 mortality_slider.set(2)
-"""mortality_msg = tk.Label(root, text="Insert mortality rate")
-mortality_msg.grid(row=4, column=0)
-mortality_textfield = tk.Entry(root,)
-mortality_textfield.grid(row=5, column=0)
-num = 1.2
-mortality_textfield.insert(0, num)
-mortality_rate_as_float = float(mortality_textfield.get())"""
 
 iteration_slider = tk.Scale(root, from_=0, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=10)
 iteration_slider.grid(row=5, column=0)
@@ -65,22 +56,6 @@ exit_button = tk.Button(root, text="Exit Application", bg="#FF0000",command= lam
 exit_button.grid(row=9, column=0)
 
 
-
-"""Helper functions to parse arguments to parameters.py"""
-def get_population():
-    return population_slider.get()
-
-def get_vaccinated():
-    return vaccer_slider.get()
-
-def get_masks():
-    return masks_slider.get()
-
-def get_iterations():
-    return iteration_slider.get()
-
-def get_mortality_rate():
-    return mortality_slider.get()
 
 #Run loop of root window
 root.mainloop()
