@@ -51,7 +51,7 @@ mortality_textfield.insert(0, "2.7")
 mortality_rate_as_float = float(mortality_textfield.get())
 
 clear_button = tk.Button(root, text="Clear graph", command=clear_graph)
-clear_button.grid(row=7, column=1)
+clear_button.grid(row=10, column=0)
 
 iteration_slider = tk.Scale(root, from_=0, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=10)
 iteration_slider.grid(row=6, column=0)
@@ -67,7 +67,7 @@ view_results_graph_button = tk.Button(root, text="View Results", bg="#0096FF", c
 view_results_scatter_button = tk.Button(root, text="View Scatter Plot", bg="#0096FF", command=view_results_scatter)
 
 exit_button = tk.Button(root, text="Exit Application", bg="#FF0000",command= lambda: sys.exit())
-exit_button.grid(row=10, column=0)
+exit_button.grid(row=11, column=0)
 
 
 
