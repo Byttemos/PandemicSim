@@ -1,5 +1,5 @@
 import main, ViewData
-from tkinter import *
+import tkinter as tk
 import sys
 
 
@@ -20,7 +20,7 @@ def view_results_scatter():
     ViewData.plot_nodes(population_slider.get(), iteration_slider.get())
     
 #Instantiate root window
-root = Tk()
+root = tk.Tk()
 
 welcomemsg = tk.Label(root, text="Greetings from the PandemicSim dev team! \n Select a population size")
 welcomemsg.grid(row=0, column=0)
