@@ -15,8 +15,6 @@ class NodeSystem:
         self.nodes[[range(masks)], 5] = 1 #give people masks
         self.infection_risk = 0.70
 
-
-
     def collision_detection(self):
         dm = np.tril(distance_matrix(self.nodes[:, :2], self.nodes[:, :2]))
         collision_pairs = list(zip(*np.where((dm < self.node_radius*2) & (dm != 0.0))))
@@ -45,7 +43,7 @@ class NodeSystem:
                 pass
             else:
                 infection = np.random.rand()
-                instance_risk = self.infection_risk - self.nodes[[second], 5]/10 - self.nodes[[first], 5]/10
+                instance_risk = self.infection_risk + self.nodes[[second], 5]/100 + self.nodes[[first], 5]/100
                 instance_risk = instance_risk[0]
                 if not infection > instance_risk:
                     if self.nodes[first, 4] == 0:
@@ -66,7 +64,11 @@ class NodeSystem:
         self.nodes[self.nodes[:, 4] == 1, 9] += 1
         self.nodes[self.nodes[:, 6] == 1, 11] += 1
         # death_nodes = self.nodes[self.nodes[:, 10] <= 50]
-        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == 336), True, False)
+        
+        #Setting immunity
+        immunity_period = 336
+
+        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == immunity_period), True, False)
         self.nodes[mask, 8] = 1
         self.nodes[mask, 4] = 0
         self.nodes[mask, 9] = 0
@@ -75,9 +77,8 @@ class NodeSystem:
         # survivor_nodes = self.nodes[self.nodes[:, 10] > self.mortality_rate]
         survivor_nodes = np.where((self.nodes[:, 10] > self.mortality_rate) & (self.nodes[:,9] == 336), True, False)
         self.nodes[survivor_nodes, 4] = 0
-        self.nodes[survivor_nodes, 9] = 0
         self.nodes[survivor_nodes, 6] = 1
+        self.nodes[self.nodes[:, 11] == 4380, 6] = 0
 
-        # self.nodes[self.nodes[:, 11] == 4380, 6] = 0
-        self.nodes[self.nodes[:, 11] == 500, 6] = 0
-
+        #Susceptible tracker
+        Sus=np.w

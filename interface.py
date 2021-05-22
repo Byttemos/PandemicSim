@@ -51,8 +51,6 @@ iteration_slider.set(4000)
 runsim_button = tk.Button(root, text="Run Simulation", bg="#82ff63", command=run)
 runsim_button.grid(row=7, column=0)
 
-
-
 view_results_graph_button = tk.Button(root, text="View Results", bg="#0096FF", command=view_results_graph)
 
 view_results_scatter_button = tk.Button(root, text="View Scatter Plot", bg="#0096FF", command=view_results_scatter)
