@@ -25,15 +25,15 @@ root = tk.Tk()
 welcomemsg = tk.Label(root, text="Greetings from the PandemicSim dev team! \n Select a population size")
 welcomemsg.grid(row=0, column=0)
 
-population_slider = tk.Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Population:", length=220, resolution=10)
+population_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Population:", length=220, resolution=10)
 population_slider.grid(row=1, column=0)
 population_slider.set(100)
 
-masks_slider = tk.Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Number of people with masks ( IN %):", length=220, resolution=5)
+masks_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Number of people with masks ( IN %):", length=220, resolution=5)
 masks_slider.grid(row=2, column=0)
 masks_slider.set(20)
 
-vaccer_slider = tk.Scale(root, from_=0, to=100, orient=HORIZONTAL, label="Number of people vaccinated ( IN %):", length=220, resolution=5)
+vaccer_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Number of people vaccinated ( IN %):", length=220, resolution=5)
 vaccer_slider.grid(row=3, column=0)
 vaccer_slider.set(20)
 
@@ -41,14 +41,14 @@ mortality_msg = tk.Label(root, text="Insert mortality rate")
 mortality_msg.grid(row=4, column=0)
 mortality_textfield = tk.Entry(root,)
 mortality_textfield.grid(row=5, column=0)
-Entry.insert(mortality_textfield, 0,2.7)
+tk.Entry.insert(mortality_textfield, 0,2.7)
 
 #mortality_textfield.insert(0, "100")
 
 mortality_rate_as_float = float(mortality_textfield.get())
 
 
-iteration_slider = tk.Scale(root, from_=0, to=10000, orient=HORIZONTAL, label="Iterations:", length=220, resolution=10)
+iteration_slider = tk.Scale(root, from_=0, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=10)
 iteration_slider.grid(row=6, column=0)
 iteration_slider.set(4000)
 
