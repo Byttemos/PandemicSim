@@ -1,5 +1,5 @@
-import tkinter as tk
 import main, ViewData
+from tkinter import *
 import sys
 
 
@@ -63,6 +63,24 @@ view_results_scatter_button = tk.Button(root, text="View Scatter Plot", bg="#009
 
 exit_button = tk.Button(root, text="Exit Application", bg="#FF0000",command= lambda: sys.exit())
 exit_button.grid(row=10, column=0)
+
+
+
+"""Helper functions to parse arguments to parameters.py"""
+def get_population():
+    return population_slider.get()
+
+def get_vaccinated():
+    return vaccer_slider.get()
+
+def get_masks():
+    return masks_slider.get()
+
+def get_iterations():
+    return iteration_slider.get()
+
+def get_mortality_rate():
+    return mortality_textfield.get()
 
 #Run loop of root window
 root.mainloop()
