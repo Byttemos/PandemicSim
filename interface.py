@@ -35,10 +35,6 @@ masks_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Numb
 masks_slider.grid(row=2, column=0)
 masks_slider.set(20)
 
-vaccer_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Number of people vaccinated ( IN %):", length=220, resolution=5)
-vaccer_slider.grid(row=3, column=0)
-vaccer_slider.set(20)
-
 mortality_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Mortality rate:", length=220, resolution=0.1)
 mortality_slider.grid(row=4, column=0)
 mortality_slider.set(2)
