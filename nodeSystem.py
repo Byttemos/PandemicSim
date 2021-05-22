@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial import distance_matrix
 # import interface
 class NodeSystem:
-    def __init__(self, n, mask_procent, vac_procent, mortality_rate):
+    def __init__(self, n, mask_procent, mortality_rate):
         """0: xpos, 1:ypos, 2: Vx, 3: Vy, 4: sick, 5:mask, 6: immune, 7: vaxxed, 8: ded, 9: sick counter, 10: are you gonna fucking die?, 11: immune counter"""
         self.nodes = np.zeros((n, 12))
         self.seed = 420

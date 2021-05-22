@@ -23,9 +23,9 @@ import numpy as np
 def callbacktest(nodesystem):
     print(nodesystem.nodes[:, 4].sum())
 
-def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_steps = 10, callback = None):
+def runSim(n, iteration_number, mask_procent, mortality_rate, log_steps = 10, callback = None):
 
-    nodesys = ns(n, mask_procent, vac_procent, mortality_rate)
+    nodesys = ns(n, mask_procent, mortality_rate)
 
     data = np.zeros((1, 12))
     for i in range(iteration_number):
