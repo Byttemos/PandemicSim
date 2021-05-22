@@ -57,7 +57,6 @@ def show_graph(iterations):
         data = np.load(f)
     # print(data[:, :, 4].sum())
     gwaf = data.sum(axis = 1)
-
     plt.plot(gwaf[:,4], color="red")
     plt.plot(gwaf[:, 8], color="black")
     plt.plot(gwaf[:, 6], color="magenta")
@@ -67,3 +66,5 @@ def show_graph(iterations):
     # print(gwaf)
     # plt.plot(gwaf, iterations)
     plt.show()
+
+ 

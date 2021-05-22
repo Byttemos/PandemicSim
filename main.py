@@ -27,7 +27,7 @@ def runSim(n, iteration_number, mask_procent, vac_procent, mortality_rate, log_s
 
     nodesys = ns(n, mask_procent, vac_procent, mortality_rate)
 
-    data = np.zeros((1, 8))
+    data = np.zeros((1, 12))
     for i in range(iteration_number):
         nodesys.updatePosition()
         nodesys.collision_detection()
