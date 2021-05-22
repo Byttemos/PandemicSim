@@ -5,10 +5,10 @@ import sys
 
 def run():
     runsim_button.configure(text="Running Simulation...")
-    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_rate_as_float)
+    main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), vaccer_slider.get(), mortality_slider.get())
     runsim_button.configure(text="Complete Simulation")
-    view_results_graph_button.grid(row=8, column=0)
-    view_results_scatter_button.grid(row=9, column=0)
+    view_results_graph_button.grid(row=7, column=0)
+    view_results_scatter_button.grid(row=8, column=0)
 
 
 def view_results_graph():
@@ -37,19 +37,23 @@ vaccer_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Num
 vaccer_slider.grid(row=3, column=0)
 vaccer_slider.set(20)
 
-mortality_msg = tk.Label(root, text="Insert mortality rate")
+mortality_slider = tk.Scale(root, from_=0, to=10, orient=tk.HORIZONTAL, label="Mortality rate:", length=150, resolution=0.1)
+mortality_slider.grid(row=4, column=0)
+mortality_slider.set(2)
+"""mortality_msg = tk.Label(root, text="Insert mortality rate")
 mortality_msg.grid(row=4, column=0)
 mortality_textfield = tk.Entry(root,)
 mortality_textfield.grid(row=5, column=0)
-mortality_textfield.insert(0, "2.7")
-mortality_rate_as_float = float(mortality_textfield.get())
+num = 1.2
+mortality_textfield.insert(0, num)
+mortality_rate_as_float = float(mortality_textfield.get())"""
 
 iteration_slider = tk.Scale(root, from_=0, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=10)
-iteration_slider.grid(row=6, column=0)
+iteration_slider.grid(row=5, column=0)
 iteration_slider.set(4000)
 
 runsim_button = tk.Button(root, text="Run Simulation", bg="#82ff63", command=run)
-runsim_button.grid(row=7, column=0)
+runsim_button.grid(row=6, column=0)
 
 
 
@@ -58,7 +62,7 @@ view_results_graph_button = tk.Button(root, text="View Results", bg="#0096FF", c
 view_results_scatter_button = tk.Button(root, text="View Scatter Plot", bg="#0096FF", command=view_results_scatter)
 
 exit_button = tk.Button(root, text="Exit Application", bg="#FF0000",command= lambda: sys.exit())
-exit_button.grid(row=10, column=0)
+exit_button.grid(row=9, column=0)
 
 
 
@@ -76,7 +80,7 @@ def get_iterations():
     return iteration_slider.get()
 
 def get_mortality_rate():
-    return mortality_textfield.get()
+    return mortality_slider.get()
 
 #Run loop of root window
 root.mainloop()
