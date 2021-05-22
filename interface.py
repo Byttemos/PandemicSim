@@ -80,7 +80,7 @@ def get_iterations():
     return iteration_slider.get()
 
 def get_mortality_rate():
-    return mortality_slider.get()
+    return mortality_.get()
 
 #Run loop of root window
 root.mainloop()

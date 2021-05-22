@@ -52,6 +52,9 @@ def plot_nodes(pop, iterations):
     ac = AnimatedScatter(data, pop)
     plt.show()
 
+def clear():
+    plt.cla()
+
 def show_graph(iterations):
     with open("simlog.npy", "rb") as f:
         data = np.load(f)
@@ -60,8 +63,11 @@ def show_graph(iterations):
     plt.plot(gwaf[:,4], color="red")
     plt.plot(gwaf[:, 8], color="black")
     plt.plot(gwaf[:, 6], color="magenta")
+    # print(data.shape[1])
+    # print(len(data[1]))
+    plt.plot(int(data.shape[1])-(gwaf[:,4]+gwaf[:,8]+gwaf[:,6]))
     plt.xlabel("Days")
-    plt.legend(["Infected", "Dead", "Immune"], loc="lower right")
+    plt.legend(["Infected", "Dead", "Immune", "susceptible"], loc="lower right")
     plt.ylim([0,100])
     # print(gwaf)
     # plt.plot(gwaf, iterations)
