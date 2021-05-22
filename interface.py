@@ -69,5 +69,7 @@ view_results_scatter_button = tk.Button(root, text="View Scatter Plot", bg="#009
 exit_button = tk.Button(root, text="Exit Application", bg="#FF0000",command= lambda: sys.exit())
 exit_button.grid(row=11, column=0)
 
+
+
 #Run loop of root window
 root.mainloop()
