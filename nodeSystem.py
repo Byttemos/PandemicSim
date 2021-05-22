@@ -80,3 +80,4 @@ class NodeSystem:
 
         # self.nodes[self.nodes[:, 11] == 4380, 6] = 0
         self.nodes[self.nodes[:, 11] == 500, 6] = 0
+
