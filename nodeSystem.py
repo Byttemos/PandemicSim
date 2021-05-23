@@ -3,7 +3,7 @@ from scipy.spatial import distance_matrix
 # import interface
 class NodeSystem:
     def __init__(self, n, mask_procent, mortality_rate):
-        """0: xposition, 1:yposition, 2: Velovityx, 3: Velocityy, 4: sick, 5:mask, 6: immune, 7: vaccinated, 8: dead, 9: sick counter, 10: chance of death, 11: immune counter"""
+        """0: xposition, 1:yposition, 2: Velocityx, 3: Velocityy, 4: sick, 5:mask, 6: immune, 7: vaccinated, 8: dead, 9: sick counter, 10: chance of death, 11: immune counter"""
         self.nodes = np.zeros((n, 12))
         self.seed = 420
         self.window_size = {"width":500, "height":500}
@@ -27,13 +27,13 @@ class NodeSystem:
 
 
     def collision_detection(self):
-        """Calculates whether or not two nodes have collided"""
+        """Parse collided nodes on to interact function"""
         dm = np.tril(distance_matrix(self.nodes[:, :2], self.nodes[:, :2]))
         collision_pairs = list(zip(*np.where((dm < self.node_radius*2) & (dm != 0.0))))
         self.interact(collision_pairs)
 
     def logData(self, data):
-        """Write data to .npy file"""
+        """Return concatenated list of nodes from current iteration"""
         if len(data.shape) == 2:
             return np.stack((data, self.nodes))
         else:
@@ -42,6 +42,7 @@ class NodeSystem:
 
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' properties"""
+
         for first, second in collided_nodes:
             
             if self.nodes[[first], 6:9].sum() >= 1 or self.nodes[[second], 6:9].sum() >= 1:
@@ -67,7 +68,7 @@ class NodeSystem:
 
 
     def updatePosition(self):
-        """Increment all node positions and reverse velocity if node is out of bounds"""
+        """Handle all increments and attribute changes that happen to the node array every iteration"""
         self.nodes[:, [0,1]] += self.nodes[:, [2,3]]
         self.nodes[self.nodes[:, 0] < 0, 2] *= (-1)
         self.nodes[self.nodes[:, 0] > self.window_size["width"], 2] *= (-1)
