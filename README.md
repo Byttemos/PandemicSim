@@ -1,7 +1,7 @@
 # PandemicSim
 An interactive simulation model of pandemic contagion 
 
-#Prerequisites
+# Prerequisites
 The following python packages are required to run the simulation software (along with Python 3.9.1):
 
 - Numpy
@@ -13,7 +13,7 @@ The following python packages are required to run the simulation software (along
 pip install numpy matplotlib scipy tkinter
 ```
 
-#Introduction
+# Introduction
 
 PandemicSim is a simple interactive simulation of disease contagion written in Python
 
