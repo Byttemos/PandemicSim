@@ -4,6 +4,7 @@ import sys
 
 
 def run():
+    """Parse ui determined parameters to main function"""
     runsim_button.configure(text="Running Simulation...")
     main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), mortality_slider.get())
     runsim_button.configure(text="Done!")

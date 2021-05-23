@@ -16,6 +16,7 @@ class AnimatedScatter(object):
                                            init_func=self.setup_plot, repeat = False, frames = self.data.shape[0], blit=True)
 
     def setup_plot(self):
+        """Initialize plot"""
         x, y = self.data[0, :, 0], self.data[0, :, 1]
         self.scat = self.ax.scatter(x, y, edgecolors="none", color="red")
 
@@ -45,6 +46,7 @@ def plot_nodes(pop, iterations):
 
 
 def show_graph(iterations):
+    """Plot graph"""
     plt.cla()
     with open("simlog.npy", "rb") as f:
         data = np.load(f)
