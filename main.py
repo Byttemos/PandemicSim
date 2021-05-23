@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
+from tkinter.constants import HORIZONTAL
 from nodeSystem import NodeSystem as ns
 import numpy as np
 
@@ -31,7 +32,7 @@ def runSim(n, iteration_number, mask_procent, mortality_rate, log_steps = 10, ca
     for i in range(iteration_number):
         nodesys.updatePosition()
         nodesys.collision_detection()
-
+        
         if (data == 0).all():
             data = nodesys.nodes
 
@@ -41,7 +42,14 @@ def runSim(n, iteration_number, mask_procent, mortality_rate, log_steps = 10, ca
         if callback:
             callback(nodesys)
 
-
+    print(nodesys.sick_counter)
+    
 
     with open("simlog.npy", "wb") as f:
         np.save(f, data)
+"""def sickCount(self):
+        sick = 0
+        if any(self.nodes[:, 4]==1):
+            sick += 1
+        print(sick)"""
+print(np.sum(ns.nodes[:,8]))

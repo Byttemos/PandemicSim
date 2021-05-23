@@ -3,6 +3,8 @@ from scipy.spatial import distance_matrix
 # import interface
 class NodeSystem:
     def __init__(self, n, mask_procent, mortality_rate):
+        self.sick_counter = 0
+        self.death_counter = 0
         """0: xposition, 1:yposition, 2: Velocityx, 3: Velocityy, 4: sick, 5:mask, 6: immune, 7: vaccinated, 8: dead, 9: sick counter, 10: chance of death, 11: immune counter"""
         self.nodes = np.zeros((n, 12))
         self.seed = 420
@@ -42,7 +44,6 @@ class NodeSystem:
 
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' properties"""
-
         for first, second in collided_nodes:
             
             if self.nodes[[first], 6:9].sum() >= 1 or self.nodes[[second], 6:9].sum() >= 1:
@@ -62,8 +63,10 @@ class NodeSystem:
                 if not infection > instance_risk:
                     if self.nodes[first, 4] == 0:
                         self.nodes[first, 4] = 1
+                        self.sick_counter += 1
                     else:
                         self.nodes[second, 4] = 1
+                        self.sick_counter += 1
 
 
 
@@ -89,3 +92,6 @@ class NodeSystem:
         self.nodes[survivor_nodes, 6] = 1
         self.nodes[self.nodes[:, 11] == self.immune_duration, 6] = 0
         self.nodes[self.nodes[:, 11] == self.immune_duration, 11] = 0
+        
+    
+ 
