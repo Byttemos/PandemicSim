@@ -6,8 +6,9 @@ class NodeSystem:
         """0: xpos, 1:ypos, 2: Vx, 3: Vy, 4: sick, 5:mask, 6: immune, 7: vaxxed, 8: ded, 9: sick counter, 10: are you gonna fucking die?, 11: immune counter"""
         self.nodes = np.zeros((n, 12))
         self.seed = 420
+        self.window_size = {"width":500, "height":500}
         np.random.seed(self.seed)
-        self.nodes[:, [0, 1]] = np.random.randint([500, 500], size = (n, 2))
+        self.nodes[:, [0, 1]] = np.random.randint([self.window_size["width"], self.window_size["height"]], size = (n, 2))
         np.random.seed(self.seed)
         self.nodes[:, [2, 3]] = np.random.randn(n, 2)
         np.random.seed(self.seed)
@@ -18,6 +19,10 @@ class NodeSystem:
         masks = (int(n/100))*int(mask_procent)
         self.nodes[[range(masks)], 5] = 1 #give people masks
         self.infection_risk = 0.70
+        self.window_size = {"width":500, "height":500}
+        self.sick_duration = 336
+        self.immune_duration = 500
+
 
 
 
@@ -35,7 +40,7 @@ class NodeSystem:
 
 
     def interact(self, collided_nodes):
-        """Determine outcome of a collision between two nodes based on the nodes' propertie"""
+        """Determine outcome of a collision between two nodes based on the nodes' properties"""
         for first, second in collided_nodes:
             
             if self.nodes[[first], 6:9].sum() >= 1 or self.nodes[[second], 6:9].sum() >= 1:
@@ -64,25 +69,21 @@ class NodeSystem:
         """Increment all node positions and reverse velocity if node is out of bounds"""
         self.nodes[:, [0,1]] += self.nodes[:, [2,3]]
         self.nodes[self.nodes[:, 0] < 0, 2] *= (-1)
-        self.nodes[self.nodes[:, 0] > 500, 2] *= (-1)
+        self.nodes[self.nodes[:, 0] > self.window_size["width"], 2] *= (-1)
         self.nodes[self.nodes[:, 1] < 0, 3] *= (-1)
-        self.nodes[self.nodes[:, 1] > 500, 3] *= (-1)
-        """increment sick counter until 140 (14 days) and determine whether the node dies or becomes immune"""
+        self.nodes[self.nodes[:, 1] > self.window_size["height"], 3] *= (-1)
+        """increment sick counter until 336 iterations (14 days) and determine whether the node dies or becomes immune"""
         self.nodes[self.nodes[:, 4] == 1, 9] += 1
         self.nodes[self.nodes[:, 6] == 1, 11] += 1
-        # death_nodes = self.nodes[self.nodes[:, 10] <= 50]
-        #Set immune_incubation_period
-        immunity_period = 336
-        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == immunity_period), True, False)
+        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == self.sick_duration), True, False)
         self.nodes[mask, 8] = 1
         self.nodes[mask, 4] = 0
         self.nodes[mask, 9] = 0
         self.nodes[mask, 2] = 0
         self.nodes[mask, 3] = 0
-        # survivor_nodes = self.nodes[self.nodes[:, 10] > self.mortality_rate]
-        survivor_nodes = np.where((self.nodes[:, 10] > self.mortality_rate) & (self.nodes[:,9] == 336), True, False)
+        survivor_nodes = np.where((self.nodes[:, 10] > self.mortality_rate) & (self.nodes[:,9] == self.sick_duration), True, False)
         self.nodes[survivor_nodes, 4] = 0
         self.nodes[survivor_nodes, 9] = 0
         self.nodes[survivor_nodes, 6] = 1
-        self.nodes[self.nodes[:, 11] == 500, 6] = 0
-        self.nodes[self.nodes[:, 11] == 500, 11] = 0
+        self.nodes[self.nodes[:, 11] == self.immune_duration, 6] = 0
+        self.nodes[self.nodes[:, 11] == self.immune_duration, 11] = 0
