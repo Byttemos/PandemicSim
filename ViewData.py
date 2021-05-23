@@ -14,12 +14,9 @@ class AnimatedScatter(object):
         self.pop_size=pop_size
         self.ani = animation.FuncAnimation(self.fig, self.update, interval = 5,
                                            init_func=self.setup_plot, repeat = False, frames = self.data.shape[0], blit=True)
-        self.colors = ["red", "green", "black", "blue", "purple", "pink"]
 
     def setup_plot(self):
         x, y = self.data[0, :, 0], self.data[0, :, 1]
-        # self.scat = self.ax.scatter(x, y, cmap="jet", edgecolor="k", c="red")
-
         self.scat = self.ax.scatter(x, y, edgecolors="none", color="red")
 
         return self.scat,
@@ -35,14 +32,8 @@ class AnimatedScatter(object):
         self.scat.set_sizes(sizes + 30)
         self.scat.set_array(data[:, 2])
         
-        """
-        if np.any(self.data[:, 4] == 1):
-            self.scat.set_color("red")
-        """
-        
         return self.scat,
-        #self.ax.text(1, 1, "Deathcount: " + sum(self.data[:,:,8]))
-
+        
 def plot_nodes(pop, iterations):
 
     with open("simlog.npy", "rb") as f:
@@ -64,7 +55,7 @@ def show_graph(iterations):
     plt.plot(gwaf[:, 6], color="magenta")
     plt.plot(int(data.shape[1])-(gwaf[:,4]+gwaf[:,8]+gwaf[:,6]))
     plt.xlabel("Iterations")
-    plt.legend(["Infected", "Dead", "Immune", "susceptible"], loc="upper right")
+    plt.legend(["Infected", "Dead", "Immune", "Susceptible"], loc="upper right")
     plt.ylim([0,100])
     plt.yticks(np.arange(0, 100, 10))
     plt.grid(linestyle="--", linewidth=1)
