@@ -9,6 +9,7 @@ The following python packages are required to run the simulation software (along
 - Scipy
 - Tkinter
 
+Assuming you have pip installed, run the following command in a terminal:
 ```
 pip install numpy matplotlib scipy tkinter
 ```
