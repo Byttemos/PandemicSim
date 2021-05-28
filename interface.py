@@ -40,7 +40,7 @@ mortality_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="
 mortality_slider.grid(row=4, column=0)
 mortality_slider.set(2)
 
-iteration_slider = tk.Scale(root, from_=0, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=10)
+iteration_slider = tk.Scale(root, from_=1, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=50)
 iteration_slider.grid(row=5, column=0)
 iteration_slider.set(4000)
 
