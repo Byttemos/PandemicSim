@@ -80,7 +80,7 @@ class NodeSystem:
         """increment sick counter until 336 iterations (14 days) and determine whether the node dies or becomes immune"""
         self.nodes[self.nodes[:, 4] == 1, 9] += 1
         self.nodes[self.nodes[:, 6] == 1, 11] += 1
-        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == self.sick_duration), True, False)
+        mask = np.where((self.nodes[:, 10] < self.mortality_rate) & (self.nodes[:, 9] == self.sick_duration), True, False)
         self.nodes[mask, 8] = 1
         self.nodes[mask, 4] = 0
         self.nodes[mask, 9] = 0
@@ -92,6 +92,3 @@ class NodeSystem:
         self.nodes[survivor_nodes, 6] = 1
         self.nodes[self.nodes[:, 11] == self.immune_duration, 6] = 0
         self.nodes[self.nodes[:, 11] == self.immune_duration, 11] = 0
-        
-    
- 
