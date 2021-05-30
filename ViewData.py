@@ -56,7 +56,7 @@ def show_graph(iterations):
     plt.plot(gwaf[:, 8], color="black")
     plt.plot(gwaf[:, 6], color="magenta")
     plt.plot(int(data.shape[1])-(gwaf[:,4]+gwaf[:,8]+gwaf[:,6]))
-    plt.xlabel("Iterations")
+    plt.xlabel("Iterations (/10)")
     plt.ylabel("Percent value")
     plt.legend(["Infected", "Dead", "Immune", "Susceptible"], loc="upper right")
     plt.ylim([0,100])

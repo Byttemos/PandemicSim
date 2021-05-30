@@ -28,7 +28,7 @@ root = tk.Tk()
 welcomemsg = tk.Label(root, text="Greetings from the PandemicSim dev team! \n Select a population size")
 welcomemsg.grid(row=0, column=0)
 
-population_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="Population:", length=220, resolution=10)
+population_slider = tk.Scale(root, from_=1, to=100, orient=tk.HORIZONTAL, label="Population:", length=220, resolution=10)
 population_slider.grid(row=1, column=0)
 population_slider.set(100)
 
