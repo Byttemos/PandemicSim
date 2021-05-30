@@ -3,7 +3,9 @@ import tkinter as tk
 import sys
 
 
+
 def run():
+
     """Parse ui determined parameters to main function"""
     runsim_button.configure(text="Running Simulation...")
     main.runSim(population_slider.get(), iteration_slider.get(), masks_slider.get(), mortality_slider.get())
@@ -28,7 +30,7 @@ root = tk.Tk()
 welcomemsg = tk.Label(root, text="Greetings from the PandemicSim dev team! \n Select a population size")
 welcomemsg.grid(row=0, column=0)
 
-population_slider = tk.Scale(root, from_=1, to=100, orient=tk.HORIZONTAL, label="Population:", length=220, resolution=10)
+population_slider = tk.Scale(root, from_=1, to=99, orient=tk.HORIZONTAL, label="Population:", length=220, resolution=10)
 population_slider.grid(row=1, column=0)
 population_slider.set(100)
 
@@ -40,7 +42,7 @@ mortality_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, label="
 mortality_slider.grid(row=4, column=0)
 mortality_slider.set(2)
 
-iteration_slider = tk.Scale(root, from_=1, to=10000, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=50)
+iteration_slider = tk.Scale(root, from_=1, to=9999, orient=tk.HORIZONTAL, label="Iterations:", length=220, resolution=50)
 iteration_slider.grid(row=5, column=0)
 iteration_slider.set(4000)
 
