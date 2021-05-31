@@ -20,3 +20,5 @@ PandemicSim is a simple interactive simulation of disease contagion written in P
 
 To execute the program run the interface file and set the parameters to your liking.
 Press the run simulation button and wait for it to complete, then press view results to view a graph of the pandemic
+
+The program uses a NUmpy seed for the RNG, this can be changed in line 10 of Nodesystem.py.
