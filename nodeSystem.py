@@ -15,15 +15,18 @@ class NodeSystem:
         self.nodes[:, [2, 3]] = np.random.randn(n, 2)
         np.random.seed(self.seed)
         self.nodes[:, 10] = np.random.randint(100, size = n)
-        self.node_radius = 1.5
+        self.node_radius = 2
         self.mortality_rate = mortality_rate
         self.nodes[-1, 4] = 1 #create patient zero
         masks = (int(n/100))*int(mask_procent)
         self.nodes[[range(masks)], 5] = 1 #give people masks
-        self.infection_risk = 0.80
+        self.infection_risk = 0.70
         self.window_size = {"width":500, "height":500}
         self.sick_duration = 336
         self.immune_duration = 500
+
+
+
 
     def collision_detection(self):
         """Parse collided nodes on to interact function"""
@@ -37,6 +40,7 @@ class NodeSystem:
             return np.stack((data, self.nodes))
         else:
             return np.concatenate((data, self.nodes[None, :, :]))
+
 
     def interact(self, collided_nodes):
         """Determine outcome of a collision between two nodes based on the nodes' properties"""
@@ -64,6 +68,8 @@ class NodeSystem:
                         self.nodes[second, 4] = 1
                         self.sick_counter += 1
 
+
+
     def updatePosition(self):
         """Handle all increments and attribute changes that happen to the node array every iteration"""
         self.nodes[:, [0,1]] += self.nodes[:, [2,3]]
@@ -74,7 +80,7 @@ class NodeSystem:
         """increment sick counter until 336 iterations (14 days) and determine whether the node dies or becomes immune"""
         self.nodes[self.nodes[:, 4] == 1, 9] += 1
         self.nodes[self.nodes[:, 6] == 1, 11] += 1
-        mask = np.where((self.nodes[:, 10] <= self.mortality_rate) & (self.nodes[:, 9] == self.sick_duration), True, False)
+        mask = np.where((self.nodes[:, 10] < self.mortality_rate) & (self.nodes[:, 9] == self.sick_duration), True, False)
         self.nodes[mask, 8] = 1
         self.nodes[mask, 4] = 0
         self.nodes[mask, 9] = 0

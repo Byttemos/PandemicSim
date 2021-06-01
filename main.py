@@ -47,3 +47,9 @@ def runSim(n, iteration_number, mask_procent, mortality_rate, log_steps = 10, ca
 
     with open("simlog.npy", "wb") as f:
         np.save(f, data)
+
+"""def sickCount(self):
+        sick = 0
+        if any(self.nodes[:, 4]==1):
+            sick += 1
+        print(sick)"""
